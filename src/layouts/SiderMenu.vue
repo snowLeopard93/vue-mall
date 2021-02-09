@@ -41,8 +41,10 @@ export default {
   },
   data() {
     this.selectedKeysMap = {};
+    this.selectedPathMap = {};
     this.openKeysMap = {};
     const menuData = this.getMenuData(this.$router.options.routes);
+    this.getAllPath(this.selectedPathMap[this.$route.path]);
     return {
       selectedKeys: this.selectedKeysMap[this.$route.path],
       openKeys: this.openKeysMap[this.$route.path],
@@ -53,6 +55,7 @@ export default {
     "$route.path": function(val) {
       this.selectedKeys = this.selectedKeysMap[val];
       this.openKeys = this.openKeysMap[val];
+      this.getAllPath(this.selectedPathMap[val]);
     },
     collapsed: function(val) {
       if (val) {
@@ -64,7 +67,7 @@ export default {
   },
   methods: {
     // 从路由中获取菜单
-    getMenuData(routes = [], parentKeys = [], selectedKey) {
+    getMenuData(routes = [], parentKeys = [], parent = [], selectedKey) {
       const menuData = [];
       for (let item of routes) {
         if (item.meta && item.meta.authority && !check(item.meta.authority)) {
@@ -73,17 +76,37 @@ export default {
         if (item.name && !item.hideInMenu) {
           this.openKeysMap[item.path] = parentKeys;
           this.selectedKeysMap[item.path] = [selectedKey || item.path];
+          this.selectedPathMap[item.path] = [
+            ...parent,
+            {
+              path: selectedKey || item.path,
+              title: item.meta ? item.meta.title : ""
+            }
+          ];
           const newItem = { ...item };
           delete newItem.children;
           if (item.children && !item.hideChildrenInMenu) {
-            newItem.children = this.getMenuData(item.children, [
-              ...parentKeys,
-              item.path
-            ]);
+            newItem.children = this.getMenuData(
+              item.children,
+              [...parentKeys, item.path],
+              [
+                ...parent,
+                { path: item.path, title: item.meta ? item.meta.title : "" }
+              ]
+            );
           } else {
             this.getMenuData(
               item.children,
               selectedKey ? parentKeys : [...parentKeys, item.path],
+              selectedKey
+                ? parent
+                : [
+                    ...parent,
+                    {
+                      path: item.path,
+                      title: item.meta ? item.meta.title : ""
+                    }
+                  ],
               selectedKey || item.path
             );
           }
@@ -94,11 +117,21 @@ export default {
           item.children
         ) {
           menuData.push(
-            ...this.getMenuData(item.children, [...parentKeys, item.path])
+            ...this.getMenuData(
+              item.children,
+              [...parentKeys, item.path],
+              [
+                ...parent,
+                { path: item.path, title: item.meta ? item.meta.title : "" }
+              ]
+            )
           );
         }
       }
       return menuData;
+    },
+    getAllPath(allPath = []) {
+      this.$store.commit("chaneCurrentMenu", allPath);
     }
   }
 };

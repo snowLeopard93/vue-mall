@@ -24,6 +24,7 @@
           <Header />
         </a-layout-header>
         <a-layout-content style="margin: 0 16px">
+          <MyBreadcrumb />
           <router-view></router-view>
         </a-layout-content>
         <a-layout-footer style="text-align: center">
@@ -42,6 +43,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import SiderMenu from "./SiderMenu";
 import SettingDrawer from "../components/SettingDrawer";
+import MyBreadcrumb from "../components/Breadcrumb";
 
 export default {
   name: "BasicLayout",
@@ -62,7 +64,8 @@ export default {
     Header,
     Footer,
     SiderMenu,
-    SettingDrawer
+    SettingDrawer,
+    MyBreadcrumb
   }
 };
 </script>
