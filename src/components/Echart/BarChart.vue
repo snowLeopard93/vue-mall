@@ -48,19 +48,16 @@ export default {
     this.chart = null;
   },
   watch: {
-    option(val) {
-      this.chart.setOption(val);
+    option() {
+      this.refreshChart();
     }
-    // option: {
-    //   handler(val) {
-    //     this.chart.setOption(val);
-    //   },
-    //   deep: true
-    // }
   },
   methods: {
     renderChart() {
       this.chart = echarts.init(this.$refs.chartDom);
+      this.refreshChart();
+    },
+    refreshChart() {
       if (this.option && this.option.xData) {
         this.defaultOption.xAxis[0].data = this.option.xData;
       }

@@ -70,19 +70,16 @@ export default {
     this.chart = null;
   },
   watch: {
-    option(val) {
-      this.chart.setOption(val);
+    option() {
+      this.refreshChart();
     }
-    // option: {
-    //   handler(val) {
-    //     this.chart.setOption(val);
-    //   },
-    //   deep: true
-    // }
   },
   methods: {
     renderChart() {
       this.chart = echarts.init(this.$refs.chartDom);
+      this.refreshChart();
+    },
+    refreshChart() {
       if (this.option && this.option.xData) {
         this.defaultOption.xAxis[0].data = this.option.xData;
       }
@@ -98,21 +95,7 @@ export default {
               width: 0
             },
             showSymbol: false,
-            areaStyle: {
-              opacity: 0.8,
-              color: item.isGradient
-                ? new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    {
-                      offset: 0,
-                      color: item.areaColor[0]
-                    },
-                    {
-                      offset: 1,
-                      color: item.areaColor[1]
-                    }
-                  ])
-                : item.color
-            },
+            areaStyle: {},
             emphasis: {
               focus: "series"
             },
