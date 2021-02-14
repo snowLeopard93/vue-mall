@@ -1,37 +1,41 @@
 <template>
   <div :class="[`nav-theme-${navTheme}`, `nav-layout-${navLayout}`]">
-    <a-layout id="components-layout-demo-side" style="min-height: 100vh">
-      <a-layout-sider
-        v-if="navLayout === 'left'"
-        :theme="navTheme"
-        :trigger="null"
-        v-model="collapsed"
-        collapsible
-        width="256px"
-      >
+    <a-layout id="components-layout-demo-top-side-2">
+      <a-layout-header style="padding: 0">
         <div class="logo">Ant Design Vue Mall</div>
-        <SiderMenu :menu-theme="navTheme" :collapsed="collapsed" />
-      </a-layout-sider>
+        <Header :header-theme="navTheme" />
+      </a-layout-header>
       <a-layout>
-        <a-layout-header style="background: #fff; padding: 0">
-          <a-icon
-            v-if="navLayout === 'left'"
-            v-auth="['admin']"
-            class="trigger"
-            :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-            @click="collapsed = !collapsed"
-          ></a-icon>
-          <Header />
-        </a-layout-header>
-        <a-layout-content style="margin: 0 16px">
+        <a-layout-sider
+          v-if="navLayout === 'left'"
+          :theme="navTheme"
+          :trigger="null"
+          v-model="collapsed"
+          collapsible
+          width="256px"
+        >
+          <SiderMenu :menu-theme="navTheme" :collapsed="collapsed" />
+          <div class="basicLayout-sidebarMenu-icon">
+            <a-icon
+              v-auth="['admin']"
+              class="trigger"
+              :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+              @click="collapsed = !collapsed"
+            />
+          </div>
+        </a-layout-sider>
+        <a-layout style="padding: 0 24px 24px">
           <MyBreadcrumb />
-          <router-view></router-view>
-        </a-layout-content>
-        <a-layout-footer style="text-align: center">
-          <Footer />
-        </a-layout-footer>
+          <a-layout-content class="basicLayout-content">
+            <router-view></router-view>
+          </a-layout-content>
+          <a-layout-footer>
+            <Footer />
+          </a-layout-footer>
+        </a-layout>
       </a-layout>
     </a-layout>
+
     <Authorized :authority="['admin']">
       <SettingDrawer />
     </Authorized>
@@ -71,23 +75,40 @@ export default {
 </script>
 
 <style scoped>
-.trigger {
-  padding: 0 20px;
-  line-height: 64px;
-  font-size: 20px;
-}
-
-.trigger:hover {
-  background: #eeeeee;
-}
-
 .logo {
+  width: 256px;
   height: 64px;
   line-height: 64px;
   text-align: center;
-  overflow: hidden;
+  display: inline-block;
 }
+
 .nav-theme-dark >>> .logo {
   color: #ffffff;
+  background: #001529;
+}
+
+.nav-theme-light >>> .logo {
+  color: #001529;
+  background: #ffffff;
+}
+
+.basicLayout-content {
+  background: #fff;
+  padding: 24px;
+  margin: 0;
+  height: 750px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.basicLayout-sidebarMenu-icon {
+  width: 64px;
+  height: 64px;
+  line-height: 64px;
+  position: absolute;
+  right: -67px;
+  bottom: 0;
+  font-size: 20px;
 }
 </style>

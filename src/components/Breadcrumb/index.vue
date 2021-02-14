@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="my-breadcrumb">
     <a-breadcrumb>
       <a-breadcrumb-item v-for="item in breadcrumbList" :key="item.path">{{
         item.title
@@ -24,4 +24,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.my-breadcrumb {
+  height: 30px;
+  line-height: 30px;
+}
+</style>
