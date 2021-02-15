@@ -9,7 +9,9 @@ import {
   Drawer,
   Radio,
   Menu,
-  Breadcrumb
+  Breadcrumb,
+  Form,
+  Input
 } from "ant-design-vue";
 import Authorized from "./components/Authorized";
 import Auth from "./directives/auth";
@@ -23,6 +25,8 @@ Vue.use(Drawer);
 Vue.use(Radio);
 Vue.use(Menu);
 Vue.use(Breadcrumb);
+Vue.use(Form);
+Vue.use(Input);
 Vue.component("Authorized", Authorized);
 Vue.use(Auth);
 
