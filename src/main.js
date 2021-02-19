@@ -10,6 +10,7 @@ import {
   Radio,
   Menu,
   Breadcrumb,
+  Table,
   Form,
   Input
 } from "ant-design-vue";
@@ -25,6 +26,7 @@ Vue.use(Drawer);
 Vue.use(Radio);
 Vue.use(Menu);
 Vue.use(Breadcrumb);
+Vue.use(Table);
 Vue.use(Form);
 Vue.use(Input);
 Vue.component("Authorized", Authorized);

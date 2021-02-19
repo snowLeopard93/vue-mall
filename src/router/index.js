@@ -68,6 +68,27 @@ const routes = [
         ]
       },
       {
+        path: "/system",
+        name: "system",
+        meta: {
+          icon: "system",
+          title: "系统管理",
+          authority: ["admin"]
+        },
+        component: { render: h => h("router-view") },
+        children: [
+          {
+            path: "/system/user",
+            name: "user",
+            meta: {
+              title: "用户管理"
+            },
+            component: () =>
+              import(/* webpackChunkName: "analysis" */ "../views/System/User")
+          }
+        ]
+      },
+      {
         path: "/form",
         name: "form",
         meta: {
