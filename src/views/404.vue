@@ -1,10 +1,18 @@
 <template>
-  <div>404</div>
+  <div style="text-align: center;">
+    <IconFont type="icon-icon-404" style="font-size: 100px;" />
+    <NotFoundSvg />
+  </div>
 </template>
 
 <script>
+import NotFoundSvg from "@/assets/images/404.svg";
+
 export default {
-  name: "404"
+  name: "NotFound",
+  components: {
+    NotFoundSvg
+  }
 };
 </script>
 
