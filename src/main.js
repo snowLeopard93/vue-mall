@@ -14,14 +14,15 @@ import {
   Form,
   Input,
   Dropdown,
+  DatePicker,
   ConfigProvider
 } from "ant-design-vue";
+import VueI18n from "vue-i18n";
 import Auth from "./directives/auth";
 import Authorized from "./components/Authorized";
-
-const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: "//at.alicdn.com/t/font_2376320_22s4zik6wfl.js" // 在 iconfont.cn 上生成
-});
+import zhCN from "./locale/zhCN";
+import enUS from "./locale/enUS";
+import queryString from "query-string";
 
 Vue.config.productionTip = false;
 
@@ -36,14 +37,30 @@ Vue.use(Table);
 Vue.use(Form);
 Vue.use(Input);
 Vue.use(Dropdown);
+Vue.use(DatePicker);
 Vue.use(ConfigProvider);
+
+Vue.use(VueI18n);
 Vue.use(Auth);
+
+const IconFont = Icon.createFromIconfontCN({
+  scriptUrl: "//at.alicdn.com/t/font_2376320_22s4zik6wfl.js" // 在 iconfont.cn 上生成
+});
 
 Vue.component("Authorized", Authorized);
 Vue.component("IconFont", IconFont);
 
+const i18n = new VueI18n({
+  locale: queryString.parse(location.search).locale || "zhCN",
+  messages: {
+    zhCN: { message: zhCN },
+    enUS: { message: enUS }
+  }
+});
+
 new Vue({
   router,
   store,
+  i18n,
   render: h => h(App)
 }).$mount("#app");
