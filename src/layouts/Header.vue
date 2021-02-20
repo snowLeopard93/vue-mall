@@ -1,5 +1,25 @@
 <template>
-  <div :class="[`header-theme-${headerTheme}`]" class="header">Header</div>
+  <div :class="[`header-theme-${headerTheme}`]" class="header">
+    <div class="header-locale">
+      <a-dropdown>
+        <a class="ant-dropdown-link" @click="e => e.preventDefault()">
+          <a-icon type="global" />
+        </a>
+        <a-menu
+          slot="overlay"
+          @click="changeLocale"
+          :selected-keys="[$route.query.locale || 'zhCN']"
+        >
+          <a-menu-item key="zhCN">
+            中文
+          </a-menu-item>
+          <a-menu-item key="enUS">
+            英文
+          </a-menu-item>
+        </a-menu>
+      </a-dropdown>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -9,6 +29,11 @@ export default {
     headerTheme: {
       type: String,
       default: "dark"
+    }
+  },
+  methods: {
+    changeLocale({ key }) {
+      this.$router.push({ query: { ...this.$route.query, locale: key } });
     }
   }
 };
@@ -28,5 +53,10 @@ export default {
 .header-theme-light {
   color: #001529;
   background: #ffffff;
+}
+
+.header-locale {
+  float: right;
+  margin-right: 30px;
 }
 </style>

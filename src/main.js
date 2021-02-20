@@ -12,16 +12,18 @@ import {
   Breadcrumb,
   Table,
   Form,
-  Input
+  Input,
+  Dropdown,
+  ConfigProvider
 } from "ant-design-vue";
-import Authorized from "./components/Authorized";
 import Auth from "./directives/auth";
-
-Vue.config.productionTip = false;
+import Authorized from "./components/Authorized";
 
 const IconFont = Icon.createFromIconfontCN({
   scriptUrl: "//at.alicdn.com/t/font_2376320_22s4zik6wfl.js" // 在 iconfont.cn 上生成
 });
+
+Vue.config.productionTip = false;
 
 Vue.use(Button);
 Vue.use(Layout);
@@ -33,6 +35,8 @@ Vue.use(Breadcrumb);
 Vue.use(Table);
 Vue.use(Form);
 Vue.use(Input);
+Vue.use(Dropdown);
+Vue.use(ConfigProvider);
 Vue.use(Auth);
 
 Vue.component("Authorized", Authorized);
