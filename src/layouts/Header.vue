@@ -1,5 +1,5 @@
 <template>
-  <div :class="[`header-theme-${headerTheme}`]">
+  <div class="header" :class="[`header-theme-${headerTheme}`]">
     <div class="header-sidebarMenu-icon">
       <a-icon
         v-auth="['admin']"
@@ -59,6 +59,9 @@ export default {
 </script>
 
 <style scoped>
+.header {
+  box-shadow: 0 0 4px #001529a3;
+}
 .header-theme-dark {
   color: #ffffff;
   background: #001529;
