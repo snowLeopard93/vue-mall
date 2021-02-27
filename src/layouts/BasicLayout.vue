@@ -2,7 +2,6 @@
   <div :class="[`nav-theme-${navTheme}`, `nav-layout-${navLayout}`]">
     <a-layout id="components-layout-demo-top-side-2">
       <a-layout-header style="padding: 0">
-        <div class="logo">Ant Design Vue Mall</div>
         <Header :header-theme="navTheme" />
       </a-layout-header>
       <a-layout>
@@ -15,14 +14,6 @@
           width="256px"
         >
           <SiderMenu :menu-theme="navTheme" :collapsed="collapsed" />
-          <div class="basicLayout-sidebarMenu-icon">
-            <a-icon
-              v-auth="['admin']"
-              class="trigger"
-              :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-              @click="collapsed = !collapsed"
-            />
-          </div>
         </a-layout-sider>
         <a-layout style="padding: 0 24px 24px">
           <MyBreadcrumb />
@@ -51,12 +42,10 @@ import MyBreadcrumb from "../components/Breadcrumb";
 
 export default {
   name: "BasicLayout",
-  data() {
-    return {
-      collapsed: false
-    };
-  },
   computed: {
+    collapsed() {
+      return this.$store.getters.collapsed;
+    },
     navTheme() {
       return this.$route.query.navTheme || "dark";
     },
@@ -75,24 +64,6 @@ export default {
 </script>
 
 <style scoped>
-.logo {
-  width: 256px;
-  height: 64px;
-  line-height: 64px;
-  text-align: center;
-  display: inline-block;
-}
-
-.nav-theme-dark >>> .logo {
-  color: #ffffff;
-  background: #001529;
-}
-
-.nav-theme-light >>> .logo {
-  color: #001529;
-  background: #ffffff;
-}
-
 .basicLayout-content {
   background: #fff;
   padding: 24px;
@@ -100,15 +71,5 @@ export default {
   height: 750px;
   overflow-x: hidden;
   overflow-y: auto;
-}
-
-.basicLayout-sidebarMenu-icon {
-  width: 64px;
-  height: 64px;
-  line-height: 64px;
-  position: absolute;
-  right: -67px;
-  bottom: 0;
-  font-size: 20px;
 }
 </style>

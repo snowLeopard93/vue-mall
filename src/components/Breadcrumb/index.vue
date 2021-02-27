@@ -11,11 +11,6 @@
 <script>
 export default {
   name: "My-Breadcrumb",
-  data() {
-    return {
-      currentMenu: []
-    };
-  },
   computed: {
     breadcrumbList() {
       return this.$store.getters.currentMenu;

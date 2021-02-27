@@ -1,5 +1,14 @@
 <template>
-  <div :class="[`header-theme-${headerTheme}`]" class="header">
+  <div :class="[`header-theme-${headerTheme}`]">
+    <div class="header-sidebarMenu-icon">
+      <a-icon
+        v-auth="['admin']"
+        type="menu"
+        class="trigger"
+        @click="changeCollapsed"
+      />
+    </div>
+    <div class="header-logo">Ant Design Vue Mall</div>
     <div class="header-locale">
       <a-dropdown>
         <a class="ant-dropdown-link" @click="e => e.preventDefault()">
@@ -31,7 +40,16 @@ export default {
       default: "dark"
     }
   },
+  data() {
+    return {
+      collapsed: false
+    };
+  },
   methods: {
+    changeCollapsed() {
+      this.collapsed = !this.collapsed;
+      this.$store.commit("changeCollapsed", this.collapsed);
+    },
     changeLocale({ key }) {
       this.$router.push({ query: { ...this.$route.query, locale: key } });
       this.$i18n.locale = key;
@@ -41,11 +59,6 @@ export default {
 </script>
 
 <style scoped>
-.header {
-  float: right;
-  width: calc(100% - 256px);
-}
-
 .header-theme-dark {
   color: #ffffff;
   background: #001529;
@@ -56,8 +69,29 @@ export default {
   background: #ffffff;
 }
 
+.header-sidebarMenu-icon {
+  width: 80px;
+  height: 64px;
+  line-height: 64px;
+  text-align: center;
+  display: inline-block;
+  font-size: 20px;
+}
+
+.header-logo {
+  width: 256px;
+  height: 64px;
+  line-height: 64px;
+  text-align: center;
+  display: inline-block;
+  font-size: 20px;
+}
+
 .header-locale {
   float: right;
-  margin-right: 30px;
+  width: 64px;
+  height: 64px;
+  line-height: 64px;
+  font-size: 20px;
 }
 </style>

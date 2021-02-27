@@ -5,9 +5,13 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    collapsed: false,
     currentMenu: []
   },
   mutations: {
+    changeCollapsed(state, collapsed) {
+      state.collapsed = collapsed;
+    },
     chaneCurrentMenu(state, menu) {
       menu = menu.filter(item => {
         return item.title;
@@ -16,6 +20,9 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    collapsed: state => {
+      return state.collapsed;
+    },
     currentMenu: state => {
       return state.currentMenu;
     }
