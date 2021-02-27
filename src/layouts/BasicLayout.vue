@@ -1,10 +1,12 @@
 <template>
   <div :class="[`nav-theme-${navTheme}`, `nav-layout-${navLayout}`]">
-    <a-layout id="components-layout-demo-top-side-2">
-      <a-layout-header style="padding: 0">
+    <a-layout id="components-layout-demo-fixed">
+      <a-layout-header
+        :style="{ position: 'fixed', zIndex: 1, width: '100%', padding: 0 }"
+      >
         <Header :header-theme="navTheme" />
       </a-layout-header>
-      <a-layout>
+      <a-layout :style="{ padding: 0, marginTop: '64px' }">
         <a-layout-sider
           v-if="navLayout === 'left'"
           :theme="navTheme"
@@ -12,12 +14,21 @@
           v-model="collapsed"
           collapsible
           width="256px"
+          :style="{
+            overflow: 'auto',
+            height: '100vh',
+            position: 'fixed',
+            left: 0
+          }"
         >
           <SiderMenu :menu-theme="navTheme" :collapsed="collapsed" />
         </a-layout-sider>
-        <a-layout style="padding: 0 24px 24px">
+        <a-layout
+          class="basicLayout-content"
+          :class="{ 'basicLayout-content-collapsed': collapsed }"
+        >
           <MyBreadcrumb />
-          <a-layout-content class="basicLayout-content">
+          <a-layout-content class="basicLayout-content-content">
             <router-view></router-view>
           </a-layout-content>
           <a-layout-footer>
@@ -65,11 +76,17 @@ export default {
 
 <style scoped>
 .basicLayout-content {
+  margin-left: 256px;
+  padding: 24px;
+}
+
+.basicLayout-content-collapsed {
+  margin-left: 80px;
+}
+
+.basicLayout-content-content {
   background: #fff;
   padding: 24px;
   margin: 0;
-  height: 750px;
-  overflow-x: hidden;
-  overflow-y: auto;
 }
 </style>
