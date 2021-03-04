@@ -74,6 +74,7 @@ export default {
 .basicLayout-content {
   margin-left: 256px;
   padding: 24px;
+  min-height: calc(100vh - 64px);
 }
 
 .basicLayout-content-collapsed {

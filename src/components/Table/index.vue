@@ -1,6 +1,10 @@
 <template>
   <div>
-    <a-table :columns="tableColumns" :data-source="dataSource" />
+    <a-table
+      :columns="tableColumns"
+      :data-source="dataSource"
+      :scroll="{ y: 550 }"
+    />
   </div>
 </template>
 
