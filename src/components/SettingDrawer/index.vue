@@ -23,16 +23,6 @@
           <a-radio value="light">白色</a-radio>
         </a-radio-group>
       </div>
-      <div>
-        <h2>导航模式</h2>
-        <a-radio-group
-          :value="$route.query.navLayout || 'left'"
-          @change="e => handleSetting('navLayout', e.target.value)"
-        >
-          <a-radio value="left">左侧</a-radio>
-          <a-radio value="top">顶部</a-radio>
-        </a-radio-group>
-      </div>
     </a-drawer>
   </div>
 </template>

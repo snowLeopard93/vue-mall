@@ -1,5 +1,5 @@
 <template>
-  <div :class="[`nav-theme-${navTheme}`, `nav-layout-${navLayout}`]">
+  <div :class="[`nav-theme-${navTheme}`]">
     <a-layout id="components-layout-demo-fixed">
       <a-layout-header
         :style="{ position: 'fixed', zIndex: 1, width: '100%', padding: 0 }"
@@ -8,7 +8,6 @@
       </a-layout-header>
       <a-layout :style="{ padding: 0, marginTop: '64px' }">
         <a-layout-sider
-          v-if="navLayout === 'left'"
           :theme="navTheme"
           :trigger="null"
           v-model="collapsed"
@@ -59,9 +58,6 @@ export default {
     },
     navTheme() {
       return this.$route.query.navTheme || "dark";
-    },
-    navLayout() {
-      return this.$route.query.navLayout || "left";
     }
   },
   components: {
