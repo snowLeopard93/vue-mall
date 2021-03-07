@@ -71,7 +71,7 @@ const routes = [
         path: "/system",
         name: "system",
         meta: {
-          icon: "system",
+          icon: "setting",
           title: "系统管理",
           authority: ["admin"]
         },
