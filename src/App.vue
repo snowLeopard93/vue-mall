@@ -9,6 +9,8 @@
 import zhCN from "ant-design-vue/lib/locale-provider/zh_CN";
 import enUS from "ant-design-vue/lib/locale-provider/en_US";
 import moment from "moment";
+import "moment/locale/zh-cn";
+
 export default {
   data() {
     return {
