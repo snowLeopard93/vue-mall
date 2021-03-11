@@ -15,7 +15,8 @@ import {
   Input,
   Dropdown,
   DatePicker,
-  ConfigProvider
+  ConfigProvider,
+  BackTop
 } from "ant-design-vue";
 import VueI18n from "vue-i18n";
 import Auth from "./directives/auth";
@@ -39,6 +40,7 @@ Vue.use(Input);
 Vue.use(Dropdown);
 Vue.use(DatePicker);
 Vue.use(ConfigProvider);
+Vue.use(BackTop);
 
 Vue.use(VueI18n);
 Vue.use(Auth);

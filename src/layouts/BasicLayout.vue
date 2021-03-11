@@ -35,6 +35,7 @@
           </a-layout-footer>
         </a-layout>
       </a-layout>
+      <a-back-top :visibilityHeight="50" />
     </a-layout>
 
     <Authorized :authority="['admin']">
