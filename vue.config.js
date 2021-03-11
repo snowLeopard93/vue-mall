@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const AntDesignThemePlugin = require("antd-theme-webpack-plugin");
+const SpeedMeasureWebpackPlugin = require("speed-measure-webpack-plugin");
 
 const options = {
   antDir: path.join(__dirname, "./node_modules/ant-design-vue"),
@@ -19,6 +20,8 @@ const options = {
 
 const themePlugin = new AntDesignThemePlugin(options);
 
+const smp = new SpeedMeasureWebpackPlugin();
+
 module.exports = {
   css: {
     loaderOptions: {
@@ -32,14 +35,22 @@ module.exports = {
       }
     }
   },
-  configureWebpack: {
+  configureWebpack: smp.wrap({
     plugins: [themePlugin, new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
     resolve: {
       alias: {
         "@ant-design/icons/lib/dist$": path.resolve(__dirname, "./src/icons.js")
       }
     }
-  },
+  }),
+  // configureWebpack: {
+  //   plugins: [themePlugin, new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
+  //   resolve: {
+  //     alias: {
+  //       "@ant-design/icons/lib/dist$": path.resolve(__dirname, "./src/icons.js")
+  //     }
+  //   }
+  // },
   chainWebpack: config => {
     const svgRule = config.module.rule("svg");
 
