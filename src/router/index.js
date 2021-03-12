@@ -83,8 +83,25 @@ const routes = [
             meta: {
               title: "用户管理"
             },
+            hideChildrenInMenu: true,
             component: () =>
-              import(/* webpackChunkName: "analysis" */ "../views/System/User")
+              import(
+                /* webpackChunkName: "system" */ "../views/System/User/index"
+              ),
+            children: [
+              {
+                path: "/system/user",
+                redirect: "/system/user/index"
+              },
+              {
+                path: "/system/user/index",
+                name: "user",
+                component: () =>
+                  import(
+                    /* webpackChunkName: "system" */ "../views/System/User/index"
+                  )
+              }
+            ]
           }
         ]
       },

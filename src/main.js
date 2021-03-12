@@ -25,6 +25,8 @@ import zhCN from "./locale/zhCN";
 import enUS from "./locale/enUS";
 import queryString from "query-string";
 
+import MyTable from "./components/Table";
+
 Vue.config.productionTip = false;
 
 Vue.use(Button);
@@ -51,6 +53,7 @@ const IconFont = Icon.createFromIconfontCN({
 
 Vue.component("Authorized", Authorized);
 Vue.component("IconFont", IconFont);
+Vue.component("MyTable", MyTable);
 
 const i18n = new VueI18n({
   locale: queryString.parse(location.search).locale || "zhCN",
