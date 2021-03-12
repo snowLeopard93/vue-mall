@@ -48,4 +48,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+/deep/ .ant-table-body {
+  min-height: 550px;
+  overflow-y: auto !important;
+}
+</style>

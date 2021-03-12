@@ -102,6 +102,32 @@ const routes = [
                   )
               }
             ]
+          },
+          {
+            path: "/system/role",
+            name: "role",
+            meta: {
+              title: "角色管理"
+            },
+            hideChildrenInMenu: true,
+            component: () =>
+              import(
+                /* webpackChunkName: "system" */ "../views/System/Role/index"
+              ),
+            children: [
+              {
+                path: "/system/role",
+                redirect: "/system/role/index"
+              },
+              {
+                path: "/system/role/index",
+                name: "role",
+                component: () =>
+                  import(
+                    /* webpackChunkName: "system" */ "../views/System/Role/index"
+                  )
+              }
+            ]
           }
         ]
       },
