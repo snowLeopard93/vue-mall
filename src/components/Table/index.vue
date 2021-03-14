@@ -3,7 +3,7 @@
     <a-table
       :columns="tableColumns"
       :data-source="dataSource"
-      :scroll="{ y: 550 }"
+      :scroll="{ y: 490 }"
     />
   </div>
 </template>
@@ -50,7 +50,6 @@ export default {
 
 <style scoped>
 /deep/ .ant-table-body {
-  min-height: 550px;
   overflow-y: auto !important;
 }
 </style>
