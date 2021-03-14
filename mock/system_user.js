@@ -1,4 +1,8 @@
-function userData(method) {
+var _ = require("underscore");
+function userData(req) {
+  let method = req.method;
+  let query = req.query;
+  console.log(query);
   let res = null;
   switch (method) {
     case "POST":
@@ -18,7 +22,7 @@ function userData(method) {
         {
           key: 2,
           loginName: "李四",
-          userName: "李四",
+          userName: "张三",
           email: "8511646576@qq.com",
           telPhone: "18709897890",
           status: 1,
@@ -105,6 +109,15 @@ function userData(method) {
         }
       ];
   }
+
+  var keys = _.keys(query);
+  var filterParams = {};
+  _.each(keys, keyItem => {
+    if (query[keyItem]) {
+      filterParams[keyItem] = query[keyItem];
+    }
+  });
+  res = _.where(res, filterParams);
   return res;
 }
 

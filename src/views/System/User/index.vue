@@ -1,12 +1,36 @@
 <template>
   <div>
+    <SearchBar>
+      <a-form layout="inline" :form="form" @submit="handleSearch">
+        <a-form-item label="用户名" has-feedback>
+          <a-input
+            placeholder="请输入用户名"
+            v-decorator="[
+              'userName',
+              {
+                rules: [
+                  {
+                    validator: validateSearchUserName
+                  }
+                ]
+              }
+            ]"
+          />
+        </a-form-item>
+        <a-form-item>
+          <a-button type="primary" html-type="submit">
+            <a-icon type="search" />
+          </a-button>
+        </a-form-item>
+      </a-form>
+    </SearchBar>
     <MyTable :columns="columns" :data-source="userList" />
   </div>
 </template>
 
 <script>
 import axios from "axios";
-// import MyTable from "../../../components/Table/index";
+import SearchBar from "../../../layouts/SearchBar";
 
 const columns = [
   {
@@ -58,9 +82,12 @@ const columns = [
 
 export default {
   name: "User",
-  // components: {
-  //   MyTable
-  // },
+  components: {
+    SearchBar
+  },
+  beforeCreate() {
+    this.form = this.$form.createForm(this, { name: "searchForm" });
+  },
   mounted() {
     this.getUserData();
   },
@@ -71,12 +98,31 @@ export default {
     };
   },
   methods: {
-    getUserData() {
-      axios
-        .post("api/system/user", { params: { ID: 12345 } })
-        .then(response => {
-          this.userList = response.data;
-        });
+    validateSearchUserName(rule, value, callback) {
+      if (value && value.length > 10) {
+        callback("长度不能大于10");
+      }
+      callback();
+    },
+    handleSearch(e) {
+      e.preventDefault();
+      this.form.validateFieldsAndScroll((err, values) => {
+        if (!err) {
+          console.log("Received values of form: ", values);
+          if (values) {
+            this.getUserData(values);
+          }
+        }
+      });
+    },
+    getUserData(params = {}) {
+      axios({
+        url: "api/system/user",
+        method: "post",
+        params: params
+      }).then(response => {
+        this.userList = response.data;
+      });
     }
   }
 };

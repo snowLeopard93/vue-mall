@@ -75,7 +75,7 @@ module.exports = {
               .split("/")
               .join("_");
             const mock = require(`./mock/${name}`);
-            const result = mock(req.method);
+            const result = mock(req);
             // 清除缓存
             delete require.cache[require.resolve(`./mock/${name}`)];
             return res.send(result);
