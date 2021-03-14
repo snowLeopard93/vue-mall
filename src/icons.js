@@ -6,3 +6,4 @@ export { default as GlobalOutline } from "@ant-design/icons/lib/outline/GlobalOu
 export { default as MenuOutline } from "@ant-design/icons/lib/outline/MenuOutline";
 export { default as LeftOutline } from "@ant-design/icons/lib/outline/LeftOutline";
 export { default as RightOutline } from "@ant-design/icons/lib/outline/RightOutline";
+export { default as SearchOutline } from "@ant-design/icons/lib/outline/SearchOutline";
