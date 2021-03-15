@@ -2,7 +2,6 @@ var _ = require("underscore");
 function userData(req) {
   let method = req.method;
   let query = req.query;
-  console.log(query);
   let res = null;
   switch (method) {
     case "POST":

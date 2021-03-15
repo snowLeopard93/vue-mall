@@ -1,36 +1,30 @@
 <template>
   <div>
-    <SearchBar>
-      <a-form layout="inline" :form="form" @submit="handleSearch">
-        <a-form-item label="用户名" has-feedback>
+    <div class="toolBar">
+      <div class="toolBar-left">
+        <a-button type="primary" @click="refreshUserData">
+          <IconFont type="icon-refresh" style="font-size: 14px;" />
+        </a-button>
+      </div>
+      <div class="toolBar-right">
+        <div style="width: 200px;display: inline-block;margin-right: 10px;">
           <a-input
             placeholder="请输入用户名"
-            v-decorator="[
-              'userName',
-              {
-                rules: [
-                  {
-                    validator: validateSearchUserName
-                  }
-                ]
-              }
-            ]"
+            v-model="searchUserName"
+            @pressEnter="changeSearchUserName"
           />
-        </a-form-item>
-        <a-form-item>
-          <a-button type="primary" html-type="submit">
-            <a-icon type="search" />
-          </a-button>
-        </a-form-item>
-      </a-form>
-    </SearchBar>
+        </div>
+        <a-button type="primary" @click="getUserData">
+          <a-icon type="search" />
+        </a-button>
+      </div>
+    </div>
     <MyTable :columns="columns" :data-source="userList" />
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import SearchBar from "../../../layouts/SearchBar";
 
 const columns = [
   {
@@ -82,9 +76,6 @@ const columns = [
 
 export default {
   name: "User",
-  components: {
-    SearchBar
-  },
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: "searchForm" });
   },
@@ -94,28 +85,31 @@ export default {
   data() {
     return {
       columns,
+      searchParams: {},
+      searchUserName: "",
       userList: []
     };
   },
   methods: {
-    validateSearchUserName(rule, value, callback) {
-      if (value && value.length > 10) {
-        callback("长度不能大于10");
-      }
-      callback();
+    changeSearchUserName() {
+      this.searchParams.userName = this.searchUserName;
+      this.getUserData(this.searchParams);
     },
-    handleSearch(e) {
-      e.preventDefault();
-      this.form.validateFieldsAndScroll((err, values) => {
-        if (!err) {
-          console.log("Received values of form: ", values);
-          if (values) {
-            this.getUserData(values);
-          }
-        }
+    refreshUserData() {
+      const params = this.searchParams;
+      axios({
+        url: "api/system/user",
+        method: "post",
+        params: params
+      }).then(response => {
+        this.userList = response.data;
       });
     },
-    getUserData(params = {}) {
+    getUserData() {
+      this.searchParams = {
+        userName: this.searchUserName
+      };
+      const params = this.searchParams;
       axios({
         url: "api/system/user",
         method: "post",
@@ -128,4 +122,22 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.toolBar {
+  height: 50px;
+  line-height: 50px;
+  margin-bottom: 10px;
+}
+
+.toolBar-left {
+  width: 30%;
+  display: inline-block;
+}
+
+.toolBar-right {
+  width: 70%;
+  display: inline-block;
+  float: right;
+  text-align: right;
+}
+</style>
