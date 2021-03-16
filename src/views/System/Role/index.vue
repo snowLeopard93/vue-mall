@@ -1,5 +1,24 @@
 <template>
   <div>
+    <div class="toolBar">
+      <div class="toolBar-left">
+        <a-button type="primary" @click="refreshRoleData">
+          <IconFont type="icon-refresh" style="font-size: 14px;" />
+        </a-button>
+      </div>
+      <div class="toolBar-right">
+        <div style="width: 200px;display: inline-block;margin-right: 10px;">
+          <a-input
+            placeholder="请输入角色名"
+            v-model="searchRoleName"
+            @pressEnter="changeSearchRoleName"
+          />
+        </div>
+        <a-button type="primary" @click="getRoleData">
+          <a-icon type="search" />
+        </a-button>
+      </div>
+    </div>
     <MyTable :columns="columns" :data-source="roleList" />
   </div>
 </template>
@@ -9,7 +28,7 @@ import axios from "axios";
 
 const columns = [
   {
-    title: "角色名称",
+    title: "角色名",
     dataIndex: "roleName",
     key: "roleName"
   },
@@ -42,16 +61,38 @@ export default {
   data() {
     return {
       columns,
+      searchParams: {},
+      searchRoleName: "",
       roleList: []
     };
   },
   methods: {
+    changeSearchRoleName() {
+      this.searchParams.roleName = this.searchRoleName;
+      this.getRoleData(this.searchParams);
+    },
+    refreshRoleData() {
+      const params = this.searchParams;
+      axios({
+        url: "api/system/role",
+        method: "post",
+        params: params
+      }).then(response => {
+        this.roleList = response.data;
+      });
+    },
     getRoleData() {
-      axios
-        .post("api/system/role", { params: { ID: 12345 } })
-        .then(response => {
-          this.roleList = response.data;
-        });
+      this.searchParams = {
+        roleName: this.searchRoleName
+      };
+      const params = this.searchParams;
+      axios({
+        url: "api/system/role",
+        method: "post",
+        params: params
+      }).then(response => {
+        this.roleList = response.data;
+      });
     }
   }
 };
