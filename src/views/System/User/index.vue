@@ -122,22 +122,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.toolBar {
-  height: 50px;
-  line-height: 50px;
-  margin-bottom: 10px;
-}
-
-.toolBar-left {
-  width: 30%;
-  display: inline-block;
-}
-
-.toolBar-right {
-  width: 70%;
-  display: inline-block;
-  float: right;
-  text-align: right;
-}
-</style>
+<style scoped></style>
