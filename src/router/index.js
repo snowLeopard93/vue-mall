@@ -8,9 +8,11 @@ import findLast from "lodash/findLast";
 import { check, isLogin } from "../utils/auth";
 import { notification } from "ant-design-vue";
 
+import systemRoutes from "./system";
+
 Vue.use(VueRouter);
 
-const routes = [
+let defaultRoutes = [
   {
     path: "/user",
     hideInMenu: true,
@@ -67,70 +69,7 @@ const routes = [
           }
         ]
       },
-      {
-        path: "/system",
-        name: "system",
-        meta: {
-          icon: "setting",
-          title: "系统管理",
-          authority: ["admin"]
-        },
-        component: { render: h => h("router-view") },
-        children: [
-          {
-            path: "/system/user",
-            name: "user",
-            meta: {
-              title: "用户管理"
-            },
-            hideChildrenInMenu: true,
-            component: () =>
-              import(
-                /* webpackChunkName: "system" */ "../views/System/User/index"
-              ),
-            children: [
-              {
-                path: "/system/user",
-                redirect: "/system/user/index"
-              },
-              {
-                path: "/system/user/index",
-                name: "user",
-                component: () =>
-                  import(
-                    /* webpackChunkName: "system" */ "../views/System/User/index"
-                  )
-              }
-            ]
-          },
-          {
-            path: "/system/role",
-            name: "role",
-            meta: {
-              title: "角色管理"
-            },
-            hideChildrenInMenu: true,
-            component: () =>
-              import(
-                /* webpackChunkName: "system" */ "../views/System/Role/index"
-              ),
-            children: [
-              {
-                path: "/system/role",
-                redirect: "/system/role/index"
-              },
-              {
-                path: "/system/role/index",
-                name: "role",
-                component: () =>
-                  import(
-                    /* webpackChunkName: "system" */ "../views/System/Role/index"
-                  )
-              }
-            ]
-          }
-        ]
-      },
+
       {
         path: "/form",
         name: "form",
@@ -216,7 +155,7 @@ const routes = [
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes: [...defaultRoutes, ...systemRoutes]
 });
 
 router.beforeEach((to, from, next) => {
