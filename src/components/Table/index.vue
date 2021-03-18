@@ -3,7 +3,7 @@
     <a-table
       :columns="tableColumns"
       :data-source="dataSource"
-      :scroll="{ y: 490 }"
+      :scroll="{ x: 1000, y: 490 }"
     />
   </div>
 </template>
@@ -39,6 +39,7 @@ export default {
           title: item.title,
           dataIndex: item.dataIndex,
           key: item.key,
+          width: item.width,
           ellipsis: !item.noEllipsis
         });
       });
@@ -50,13 +51,13 @@ export default {
 
 <style scoped lang="less">
 /deep/ .ant-table-body {
-  overflow-y: auto !important;
+  overflow: auto !important;
 }
 
 /deep/ .ant-table-body {
   &::-webkit-scrollbar {
     width: 10px;
-    height: 110px;
+    height: 10px;
     background-color: #f5f5f5;
   }
   /*定义滚动条轨道 内阴影+圆角*/
