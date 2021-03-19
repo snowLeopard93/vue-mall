@@ -12,7 +12,7 @@ function userData(req) {
           userName: "张三",
           email: "2511646576@qq.com",
           telPhone: "15709897890",
-          status: 1,
+          status: "1",
           createTime: "2021-02-15 09:00:00",
           address: "福建省福州市",
           remark:
@@ -24,7 +24,7 @@ function userData(req) {
           userName: "张三",
           email: "8511646576@qq.com",
           telPhone: "18709897890",
-          status: 1,
+          status: "2",
           createTime: "2021-02-15 12:00:00",
           address: "福建省厦门市",
           remark:
@@ -36,7 +36,7 @@ function userData(req) {
           userName: "王五",
           email: "2511646576@qq.com",
           telPhone: "15709897890",
-          status: 1,
+          status: "1",
           createTime: "2021-02-15 09:00:00",
           address: "福建省福州市",
           remark:
@@ -48,7 +48,7 @@ function userData(req) {
           userName: "赵六",
           email: "2511646576@qq.com",
           telPhone: "15709897890",
-          status: 1,
+          status: "2",
           createTime: "2021-02-15 09:00:00",
           address: "福建省福州市",
           remark:
@@ -64,7 +64,7 @@ function userData(req) {
           userName: "张三",
           email: "2511646576@qq.com",
           telPhone: "15709897890",
-          status: 1,
+          status: "1",
           createTime: "2021-02-15 09:00:00",
           address: "福建省福州市",
           remark:
@@ -76,7 +76,7 @@ function userData(req) {
           userName: "李四",
           email: "8511646576@qq.com",
           telPhone: "18709897890",
-          status: 1,
+          status: "2",
           createTime: "2021-02-15 12:00:00",
           address: "福建省厦门市",
           remark:
@@ -88,7 +88,7 @@ function userData(req) {
           userName: "王五",
           email: "2511646576@qq.com",
           telPhone: "15709897890",
-          status: 1,
+          status: "1",
           createTime: "2021-02-15 09:00:00",
           address: "福建省福州市",
           remark:
@@ -100,7 +100,7 @@ function userData(req) {
           userName: "赵六",
           email: "2511646576@qq.com",
           telPhone: "15709897890",
-          status: 1,
+          status: "2",
           createTime: "2021-02-15 09:00:00",
           address: "福建省福州市",
           remark:

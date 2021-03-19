@@ -16,7 +16,8 @@ import {
   Dropdown,
   DatePicker,
   ConfigProvider,
-  BackTop
+  BackTop,
+  Select
 } from "ant-design-vue";
 import VueI18n from "vue-i18n";
 import Auth from "./directives/auth";
@@ -26,6 +27,7 @@ import enUS from "./locale/enUS";
 import queryString from "query-string";
 
 import MyTable from "./components/Table";
+import MySelect from "./components/Select";
 
 Vue.config.productionTip = false;
 
@@ -43,6 +45,7 @@ Vue.use(Dropdown);
 Vue.use(DatePicker);
 Vue.use(ConfigProvider);
 Vue.use(BackTop);
+Vue.use(Select);
 
 Vue.use(VueI18n);
 Vue.use(Auth);
@@ -54,6 +57,7 @@ const IconFont = Icon.createFromIconfontCN({
 Vue.component("Authorized", Authorized);
 Vue.component("IconFont", IconFont);
 Vue.component("MyTable", MyTable);
+Vue.component("MySelect", MySelect);
 
 const i18n = new VueI18n({
   locale: queryString.parse(location.search).locale || "zhCN",

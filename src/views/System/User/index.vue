@@ -8,6 +8,12 @@
       </div>
       <div class="toolBar-right">
         <div style="width: 200px;display: inline-block;margin-right: 10px;">
+          <MySelect
+            :data-source="searchStatusList"
+            @handleChange="changeSearchStatus"
+          />
+        </div>
+        <div style="width: 200px;display: inline-block;margin-right: 10px;">
           <a-input
             placeholder="请输入用户名"
             v-model="searchUserName"
@@ -26,54 +32,6 @@
 <script>
 import axios from "axios";
 
-const columns = [
-  {
-    title: "登录名",
-    dataIndex: "loginName",
-    key: "loginName"
-  },
-  {
-    title: "用户名",
-    dataIndex: "userName",
-    key: "userName"
-  },
-  {
-    title: "邮箱",
-    dataIndex: "email",
-    key: "email"
-  },
-  {
-    title: "手机号",
-    dataIndex: "telPhone",
-    key: "telPhone"
-  },
-  {
-    title: "状态",
-    dataIndex: "status",
-    key: "status"
-  },
-  {
-    title: "创建时间",
-    dataIndex: "createTime",
-    key: "createTime"
-  },
-  {
-    title: "地址",
-    dataIndex: "address",
-    key: "address"
-  },
-  {
-    title: "备注",
-    dataIndex: "remark",
-    key: "remark",
-    noEllipsis: true
-  },
-  {
-    title: "操作",
-    key: "action"
-  }
-];
-
 export default {
   name: "User",
   beforeCreate() {
@@ -84,16 +42,84 @@ export default {
   },
   data() {
     return {
-      columns,
+      columns: [
+        {
+          title: "登录名",
+          dataIndex: "loginName",
+          key: "loginName"
+        },
+        {
+          title: "用户名",
+          dataIndex: "userName",
+          key: "userName"
+        },
+        {
+          title: "邮箱",
+          dataIndex: "email",
+          key: "email"
+        },
+        {
+          title: "手机号",
+          dataIndex: "telPhone",
+          key: "telPhone"
+        },
+        {
+          title: "状态",
+          dataIndex: "status",
+          key: "status"
+        },
+        {
+          title: "创建时间",
+          dataIndex: "createTime",
+          key: "createTime"
+        },
+        {
+          title: "地址",
+          dataIndex: "address",
+          key: "address"
+        },
+        {
+          title: "备注",
+          dataIndex: "remark",
+          key: "remark",
+          noEllipsis: true
+        },
+        {
+          title: "操作",
+          key: "action"
+        }
+      ],
+      searchStatusList: [
+        {
+          id: "",
+          value: "",
+          label: "请选择"
+        },
+        {
+          id: "1",
+          value: "1",
+          label: "正常"
+        },
+        {
+          id: "2",
+          value: "2",
+          label: "已锁定"
+        }
+      ],
       searchParams: {},
       searchUserName: "",
       userList: []
     };
   },
   methods: {
+    changeSearchStatus(data) {
+      console.log("父组件获取", data);
+      this.searchParams.status = data;
+      this.getUserData();
+    },
     changeSearchUserName() {
       this.searchParams.userName = this.searchUserName;
-      this.getUserData(this.searchParams);
+      this.getUserData();
     },
     refreshUserData() {
       const params = this.searchParams;
@@ -106,9 +132,6 @@ export default {
       });
     },
     getUserData() {
-      this.searchParams = {
-        userName: this.searchUserName
-      };
       const params = this.searchParams;
       axios({
         url: "api/system/user",
