@@ -1,6 +1,7 @@
 <template>
   <div>
     <MyToolBar
+      :searchInputPlaceholder="searchInputPlaceholder"
       @handleRefresh="getLogData"
       @handleChangeSearchParamName="changeSearchParamName"
       @handleSearchBtnClick="changeSearchParamName"
@@ -15,32 +16,6 @@
 <script>
 import axios from "axios";
 
-const columns = [
-  {
-    title: "日志名称",
-    dataIndex: "name",
-    key: "name"
-  },
-  {
-    title: "日志类型",
-    dataIndex: "logType",
-    key: "logType"
-  },
-  {
-    title: "内容",
-    dataIndex: "content",
-    key: "content"
-  },
-  {
-    title: "创建时间",
-    dataIndex: "ctime",
-    key: "ctime"
-  },
-  {
-    title: "操作",
-    key: "action"
-  }
-];
 export default {
   name: "Log",
   mounted() {
@@ -48,9 +23,35 @@ export default {
   },
   data() {
     return {
-      columns,
+      columns: [
+        {
+          title: "日志名称",
+          dataIndex: "name",
+          key: "name"
+        },
+        {
+          title: "日志类型",
+          dataIndex: "logType",
+          key: "logType"
+        },
+        {
+          title: "内容",
+          dataIndex: "content",
+          key: "content"
+        },
+        {
+          title: "创建时间",
+          dataIndex: "ctime",
+          key: "ctime"
+        },
+        {
+          title: "操作",
+          key: "action"
+        }
+      ],
       searchParams: {},
-      logList: []
+      logList: [],
+      searchInputPlaceholder: "请输入日志名称"
     };
   },
   methods: {

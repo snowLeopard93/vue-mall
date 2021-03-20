@@ -11,7 +11,7 @@
       <slot name="rightToolBar">
         <div style="width: 200px;display: inline-block;margin-right: 10px;">
           <a-input
-            placeholder="请输入"
+            :placeholder="searchInputPlaceholder"
             v-model="searchParamName"
             @pressEnter="changeSearchParamName"
           />
@@ -27,6 +27,13 @@
 <script>
 export default {
   name: "MyToolBar",
+  props: {
+    searchInputPlaceholder: {
+      type: String,
+      required: false,
+      default: () => {}
+    }
+  },
   data() {
     return {
       searchParamName: ""
