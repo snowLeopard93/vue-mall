@@ -87,6 +87,32 @@ let systemRoutes = [
               )
           }
         ]
+      },
+      {
+        path: "/system/log",
+        name: "log",
+        meta: {
+          title: "日志管理"
+        },
+        hideChildrenInMenu: true,
+        component: () =>
+          import(
+            /* webpackChunkName: "system" */ "../../views/System/Log/index"
+          ),
+        children: [
+          {
+            path: "/system/log",
+            redirect: "/system/log/index"
+          },
+          {
+            path: "/system/log/index",
+            name: "log",
+            component: () =>
+              import(
+                /* webpackChunkName: "system" */ "../../views/System/Log/index"
+              )
+          }
+        ]
       }
     ]
   }
