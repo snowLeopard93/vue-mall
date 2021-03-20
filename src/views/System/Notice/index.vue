@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="toolBar">
-      <div class="toolBar-left">
+    <MyToolBar>
+      <template v-slot:leftToolBar>
         <a-button type="primary" @click="refreshNoticeData">
           <IconFont type="icon-refresh" style="font-size: 14px;" />
         </a-button>
-      </div>
-      <div class="toolBar-right">
+      </template>
+      <template v-slot:rightToolBar>
         <div style="width: 200px;display: inline-block;margin-right: 10px;">
           <a-input
             placeholder="请输入标题"
@@ -17,8 +17,8 @@
         <a-button type="primary" @click="getNoticeData">
           <a-icon type="search" />
         </a-button>
-      </div>
-    </div>
+      </template>
+    </MyToolBar>
     <MyTable :columns="columns" :data-source="noticeList" />
   </div>
 </template>
