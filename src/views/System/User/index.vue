@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="toolBar">
-      <div class="toolBar-left">
+    <MyToolBar>
+      <template v-slot:leftToolBar>
         <a-button type="primary" @click="refreshUserData">
           <IconFont type="icon-refresh" style="font-size: 14px;" />
         </a-button>
-      </div>
-      <div class="toolBar-right">
+      </template>
+      <template v-slot:rightToolBar>
         <div style="width: 200px;display: inline-block;margin-right: 10px;">
           <MySelect
             :data-source="searchStatusList"
@@ -23,8 +23,8 @@
         <a-button type="primary" @click="getUserData">
           <a-icon type="search" />
         </a-button>
-      </div>
-    </div>
+      </template>
+    </MyToolBar>
     <MyTable :columns="columns" :data-source="userList" />
   </div>
 </template>
@@ -66,7 +66,10 @@ export default {
         {
           title: "状态",
           dataIndex: "status",
-          key: "status"
+          key: "status",
+          customRender: function(text, record) {
+            return record.showStatus;
+          }
         },
         {
           title: "创建时间",
@@ -113,7 +116,6 @@ export default {
   },
   methods: {
     changeSearchStatus(data) {
-      console.log("父组件获取", data);
       this.searchParams.status = data;
       this.getUserData();
     },
@@ -128,7 +130,7 @@ export default {
         method: "post",
         params: params
       }).then(response => {
-        this.userList = response.data;
+        this.formatUserData(response.data);
       });
     },
     getUserData() {
@@ -138,8 +140,24 @@ export default {
         method: "post",
         params: params
       }).then(response => {
-        this.userList = response.data;
+        this.formatUserData(response.data);
       });
+    },
+    formatUserData(data = []) {
+      data.forEach(item => {
+        switch (item.status) {
+          case "1":
+            item.showStatus = "正常";
+            break;
+          case "2":
+            item.showStatus = "已锁定";
+            break;
+          default:
+            item.showStatus = "";
+            break;
+        }
+      });
+      this.userList = data;
     }
   }
 };

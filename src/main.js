@@ -28,6 +28,7 @@ import queryString from "query-string";
 
 import MyTable from "./components/Table";
 import MySelect from "./components/Select";
+import MyToolBar from "./layouts/ToolBar";
 
 Vue.config.productionTip = false;
 
@@ -58,6 +59,7 @@ Vue.component("Authorized", Authorized);
 Vue.component("IconFont", IconFont);
 Vue.component("MyTable", MyTable);
 Vue.component("MySelect", MySelect);
+Vue.component("MyToolBar", MyToolBar);
 
 const i18n = new VueI18n({
   locale: queryString.parse(location.search).locale || "zhCN",
