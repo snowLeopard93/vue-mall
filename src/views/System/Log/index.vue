@@ -4,7 +4,7 @@
       :searchInputPlaceholder="searchInputPlaceholder"
       @handleRefresh="getLogData"
       @handleChangeSearchParamName="changeSearchParamName"
-      @handleSearchBtnClick="changeSearchParamName"
+      @handleSearchBtnClick="getParams"
     >
       <template v-slot:leftToolBar />
       <template v-slot:rightToolBar />
@@ -56,6 +56,10 @@ export default {
   },
   methods: {
     changeSearchParamName(data) {
+      this.searchParams.name = data;
+      this.getLogData();
+    },
+    getParams(data) {
       this.searchParams.name = data;
       this.getLogData();
     },

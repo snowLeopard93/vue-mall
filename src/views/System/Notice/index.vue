@@ -2,7 +2,7 @@
   <div>
     <MyToolBar>
       <template v-slot:leftToolBar>
-        <a-button type="primary" @click="refreshNoticeData">
+        <a-button type="primary" @click="getNoticeData">
           <IconFont type="icon-refresh" style="font-size: 14px;" />
         </a-button>
       </template>
@@ -14,7 +14,7 @@
             @pressEnter="changeSearchTitle"
           />
         </div>
-        <a-button type="primary" @click="getNoticeData">
+        <a-button type="primary" @click="getParams">
           <a-icon type="search" />
         </a-button>
       </template>
@@ -26,37 +26,6 @@
 <script>
 import axios from "axios";
 
-const columns = [
-  {
-    title: "标题",
-    dataIndex: "title",
-    key: "title"
-  },
-  {
-    title: "状态",
-    dataIndex: "status",
-    key: "status"
-  },
-  {
-    title: "内容",
-    dataIndex: "content",
-    key: "content"
-  },
-  {
-    title: "创建时间",
-    dataIndex: "ctime",
-    key: "ctime"
-  },
-  {
-    title: "修改时间",
-    dataIndex: "mtime",
-    key: "mtime"
-  },
-  {
-    title: "操作",
-    key: "action"
-  }
-];
 export default {
   name: "index",
   mounted() {
@@ -64,7 +33,37 @@ export default {
   },
   data() {
     return {
-      columns,
+      columns: [
+        {
+          title: "标题",
+          dataIndex: "title",
+          key: "title"
+        },
+        {
+          title: "状态",
+          dataIndex: "status",
+          key: "status"
+        },
+        {
+          title: "内容",
+          dataIndex: "content",
+          key: "content"
+        },
+        {
+          title: "创建时间",
+          dataIndex: "ctime",
+          key: "ctime"
+        },
+        {
+          title: "修改时间",
+          dataIndex: "mtime",
+          key: "mtime"
+        },
+        {
+          title: "操作",
+          key: "action"
+        }
+      ],
       searchParams: {},
       searchTitle: "",
       noticeList: []
@@ -73,22 +72,13 @@ export default {
   methods: {
     changeSearchTitle() {
       this.searchParams.title = this.searchTitle;
-      this.getNoticeData(this.searchParams);
+      this.getNoticeData();
     },
-    refreshNoticeData() {
-      const params = this.searchParams;
-      axios({
-        url: "api/system/notice",
-        method: "post",
-        params: params
-      }).then(response => {
-        this.noticeList = response.data;
-      });
+    getParams() {
+      this.searchParams.title = this.searchTitle;
+      this.getNoticeData();
     },
     getNoticeData() {
-      this.searchParams = {
-        title: this.searchTitle
-      };
       const params = this.searchParams;
       axios({
         url: "api/system/notice",

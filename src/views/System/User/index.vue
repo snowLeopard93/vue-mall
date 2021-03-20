@@ -2,7 +2,7 @@
   <div>
     <MyToolBar>
       <template v-slot:leftToolBar>
-        <a-button type="primary" @click="refreshUserData">
+        <a-button type="primary" @click="getUserData">
           <IconFont type="icon-refresh" style="font-size: 14px;" />
         </a-button>
       </template>
@@ -20,7 +20,7 @@
             @pressEnter="changeSearchUserName"
           />
         </div>
-        <a-button type="primary" @click="getUserData">
+        <a-button type="primary" @click="getParams">
           <a-icon type="search" />
         </a-button>
       </template>
@@ -34,9 +34,6 @@ import axios from "axios";
 
 export default {
   name: "User",
-  beforeCreate() {
-    this.form = this.$form.createForm(this, { name: "searchForm" });
-  },
   mounted() {
     this.getUserData();
   },
@@ -123,15 +120,9 @@ export default {
       this.searchParams.userName = this.searchUserName;
       this.getUserData();
     },
-    refreshUserData() {
-      const params = this.searchParams;
-      axios({
-        url: "api/system/user",
-        method: "post",
-        params: params
-      }).then(response => {
-        this.formatUserData(response.data);
-      });
+    getParams() {
+      this.searchParams.userName = this.searchUserName;
+      this.getUserData();
     },
     getUserData() {
       const params = this.searchParams;

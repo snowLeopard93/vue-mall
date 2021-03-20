@@ -2,7 +2,7 @@
   <div>
     <MyToolBar>
       <template v-slot:leftToolBar>
-        <a-button type="primary" @click="refreshRoleData">
+        <a-button type="primary" @click="getRoleData">
           <IconFont type="icon-refresh" style="font-size: 14px;" />
         </a-button>
       </template>
@@ -14,7 +14,7 @@
             @pressEnter="changeSearchRoleName"
           />
         </div>
-        <a-button type="primary" @click="getRoleData">
+        <a-button type="primary" @click="getParams">
           <a-icon type="search" />
         </a-button>
       </template>
@@ -26,33 +26,6 @@
 <script>
 import axios from "axios";
 
-const columns = [
-  {
-    title: "角色名",
-    dataIndex: "roleName",
-    key: "roleName"
-  },
-  {
-    title: "角色描述",
-    dataIndex: "desc",
-    key: "desc"
-  },
-  {
-    title: "创建时间",
-    dataIndex: "ctime",
-    key: "ctime"
-  },
-  {
-    title: "修改时间",
-    dataIndex: "mtime",
-    key: "mtime"
-  },
-  {
-    title: "操作",
-    key: "action"
-  }
-];
-
 export default {
   name: "Role",
   mounted() {
@@ -60,7 +33,32 @@ export default {
   },
   data() {
     return {
-      columns,
+      columns: [
+        {
+          title: "角色名",
+          dataIndex: "roleName",
+          key: "roleName"
+        },
+        {
+          title: "角色描述",
+          dataIndex: "desc",
+          key: "desc"
+        },
+        {
+          title: "创建时间",
+          dataIndex: "ctime",
+          key: "ctime"
+        },
+        {
+          title: "修改时间",
+          dataIndex: "mtime",
+          key: "mtime"
+        },
+        {
+          title: "操作",
+          key: "action"
+        }
+      ],
       searchParams: {},
       searchRoleName: "",
       roleList: []
@@ -69,22 +67,13 @@ export default {
   methods: {
     changeSearchRoleName() {
       this.searchParams.roleName = this.searchRoleName;
-      this.getRoleData(this.searchParams);
+      this.getRoleData();
     },
-    refreshRoleData() {
-      const params = this.searchParams;
-      axios({
-        url: "api/system/role",
-        method: "post",
-        params: params
-      }).then(response => {
-        this.roleList = response.data;
-      });
+    getParams() {
+      this.searchParams.roleName = this.searchRoleName;
+      this.getRoleData();
     },
     getRoleData() {
-      this.searchParams = {
-        roleName: this.searchRoleName
-      };
       const params = this.searchParams;
       axios({
         url: "api/system/role",
