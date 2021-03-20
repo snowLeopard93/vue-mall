@@ -40,7 +40,8 @@ export default {
           dataIndex: item.dataIndex,
           key: item.key,
           width: item.width,
-          ellipsis: !item.noEllipsis
+          ellipsis: !item.noEllipsis,
+          customRender: item.customRender
         });
       });
       this.tableColumns = tableColumns;
