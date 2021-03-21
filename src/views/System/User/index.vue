@@ -7,13 +7,13 @@
         </a-button>
       </template>
       <template v-slot:rightToolBar>
-        <div style="width: 200px;display: inline-block;margin-right: 10px;">
+        <div class="searchForm-item">
           <MySelect
             :data-source="searchStatusList"
             @handleChange="changeSearchStatus"
           />
         </div>
-        <div style="width: 200px;display: inline-block;margin-right: 10px;">
+        <div class="searchForm-item">
           <a-input
             placeholder="请输入用户名"
             v-model="searchUserName"

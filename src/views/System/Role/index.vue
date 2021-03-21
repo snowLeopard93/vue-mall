@@ -7,7 +7,7 @@
         </a-button>
       </template>
       <template v-slot:rightToolBar>
-        <div style="width: 200px;display: inline-block;margin-right: 10px;">
+        <div class="searchForm-item">
           <a-input
             placeholder="请输入角色名"
             v-model="searchRoleName"

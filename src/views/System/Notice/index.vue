@@ -7,7 +7,13 @@
         </a-button>
       </template>
       <template v-slot:rightToolBar>
-        <div style="width: 200px;display: inline-block;margin-right: 10px;">
+        <div class="searchForm-item">
+          <MySelect
+            :data-source="searchStatusList"
+            @handleChange="changeSearchStatus"
+          />
+        </div>
+        <div class="searchForm-item">
           <a-input
             placeholder="请输入标题"
             v-model="searchTitle"
@@ -42,7 +48,10 @@ export default {
         {
           title: "状态",
           dataIndex: "status",
-          key: "status"
+          key: "status",
+          customRender: function(text, record) {
+            return record.showStatus;
+          }
         },
         {
           title: "内容",
@@ -64,12 +73,38 @@ export default {
           key: "action"
         }
       ],
+      searchStatusList: [
+        {
+          id: "",
+          value: "",
+          label: "请选择"
+        },
+        {
+          id: "1",
+          value: "1",
+          label: "待提交"
+        },
+        {
+          id: "2",
+          value: "2",
+          label: "待审核"
+        },
+        {
+          id: "3",
+          value: "3",
+          label: "已发布"
+        }
+      ],
       searchParams: {},
       searchTitle: "",
       noticeList: []
     };
   },
   methods: {
+    changeSearchStatus(data) {
+      this.searchParams.status = data;
+      this.getNoticeData();
+    },
     changeSearchTitle() {
       this.searchParams.title = this.searchTitle;
       this.getNoticeData();
@@ -85,8 +120,27 @@ export default {
         method: "post",
         params: params
       }).then(response => {
-        this.noticeList = response.data;
+        this.formatNoticeData(response.data);
       });
+    },
+    formatNoticeData(data = []) {
+      data.forEach(item => {
+        switch (item.status) {
+          case "1":
+            item.showStatus = "待提交";
+            break;
+          case "2":
+            item.showStatus = "待审核";
+            break;
+          case "3":
+            item.showStatus = "已发布";
+            break;
+          default:
+            item.showStatus = "";
+            break;
+        }
+      });
+      this.noticeList = data;
     }
   }
 };

@@ -18,3 +18,10 @@
      border-radius: 10px;
      background-color: #bdbdbd;
  }
+
+ /*搜索框 样式*/
+ .searchForm-item {
+    width: 200px;
+    display: inline-block;
+    margin-right: 10px;
+ }

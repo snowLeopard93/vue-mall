@@ -9,7 +9,7 @@
     </div>
     <div class="toolBar-right">
       <slot name="rightToolBar">
-        <div style="width: 200px;display: inline-block;margin-right: 10px;">
+        <div class="searchForm-item">
           <a-input
             :placeholder="searchInputPlaceholder"
             v-model="searchParamName"
