@@ -1,10 +1,12 @@
 <template>
   <div>
     <a-table
+      :pagination="pagination"
       :columns="tableColumns"
       :data-source="dataSource"
       :scroll="{ x: 1000, y: 490 }"
-    />
+    >
+    </a-table>
   </div>
 </template>
 
@@ -25,6 +27,14 @@ export default {
   },
   data() {
     return {
+      pagination: {
+        showQuickJumper: true,
+        defaultPageSize: 5,
+        showTotal: total => `共 ${total} 条数据`,
+        showSizeChanger: true,
+        pageSizeOptions: ["5", "10", "15", "20"],
+        onShowSizeChange: (current, pageSize) => (this.pageSize = pageSize)
+      },
       tableColumns: []
     };
   },
@@ -51,6 +61,10 @@ export default {
 </script>
 
 <style scoped lang="less">
+#components-pagination-demo-mini .ant-pagination:not(:last-child) {
+  margin-bottom: 24px;
+}
+
 /deep/ .ant-table-body {
   overflow: auto !important;
 }
