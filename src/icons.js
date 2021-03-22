@@ -7,3 +7,4 @@ export { default as MenuOutline } from "@ant-design/icons/lib/outline/MenuOutlin
 export { default as LeftOutline } from "@ant-design/icons/lib/outline/LeftOutline";
 export { default as RightOutline } from "@ant-design/icons/lib/outline/RightOutline";
 export { default as SearchOutline } from "@ant-design/icons/lib/outline/SearchOutline";
+export { default as CloseOutline } from "@ant-design/icons/lib/outline/CloseOutline";
