@@ -5,6 +5,7 @@
       :columns="tableColumns"
       :data-source="dataSource"
       :scroll="{ x: 1000, y: 490 }"
+      :customRow="handleClickRow"
     >
     </a-table>
   </div>
@@ -51,20 +52,31 @@ export default {
           key: item.key,
           width: item.width,
           ellipsis: !item.noEllipsis,
-          customRender: item.customRender
+          customRender: item.customRender,
+          slots: item.slots,
+          scopedSlots: item.scopedSlots
         });
       });
       this.tableColumns = tableColumns;
+    },
+    handleClickRow(record, index) {
+      return {
+        on: {
+          dblclick: () => {
+            console.log(record, index);
+            console.log("点击行内容record", record);
+            console.log("序号索引index", index);
+
+            this.$emit("dbClickRow", record);
+          }
+        }
+      };
     }
   }
 };
 </script>
 
 <style scoped lang="less">
-#components-pagination-demo-mini .ant-pagination:not(:last-child) {
-  margin-bottom: 24px;
-}
-
 /deep/ .ant-table-body {
   overflow: auto !important;
 }

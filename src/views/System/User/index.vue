@@ -25,15 +25,24 @@
         </a-button>
       </template>
     </MyToolBar>
-    <MyTable :columns="columns" :data-source="userList" />
+    <MyTable
+      :columns="columns"
+      :data-source="userList"
+      @dbClickRow="dbClickRow"
+    />
+    <UserDetail />
   </div>
 </template>
 
 <script>
+import UserDetail from "./detail";
 import axios from "axios";
 
 export default {
   name: "User",
+  components: {
+    UserDetail
+  },
   mounted() {
     this.getUserData();
   },
@@ -43,7 +52,9 @@ export default {
         {
           title: "登录名",
           dataIndex: "loginName",
-          key: "loginName"
+          key: "loginName",
+          slots: { title: "customTitle" },
+          scopedSlots: { customRender: "loginName" }
         },
         {
           title: "用户名",
@@ -108,7 +119,8 @@ export default {
       ],
       searchParams: {},
       searchUserName: "",
-      userList: []
+      userList: [],
+      detailVisible: false
     };
   },
   methods: {
@@ -149,6 +161,9 @@ export default {
         }
       });
       this.userList = data;
+    },
+    dbClickRow() {
+      this.$store.commit("changeDetailDrawerVisible", true);
     }
   }
 };

@@ -6,7 +6,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     collapsed: false,
-    currentMenu: []
+    currentMenu: [],
+    detailDrawerVisible: false
   },
   mutations: {
     changeCollapsed(state, collapsed) {
@@ -17,6 +18,10 @@ export default new Vuex.Store({
         return item.title;
       });
       state.currentMenu = menu;
+    },
+    changeDetailDrawerVisible(state, visible) {
+      console.log("changeDetailDrawerVisible");
+      state.detailDrawerVisible = visible;
     }
   },
   getters: {
@@ -25,6 +30,9 @@ export default new Vuex.Store({
     },
     currentMenu: state => {
       return state.currentMenu;
+    },
+    detailDrawerVisible: state => {
+      return state.detailDrawerVisible;
     }
   },
   actions: {},
