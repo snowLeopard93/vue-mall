@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "My-Table",
+  name: "MyTable",
   props: {
     columns: {
       type: Array,

@@ -26,7 +26,7 @@
 </template>
 <script>
 export default {
-  name: "DetailDrawer",
+  name: "MyDetailDrawer",
   computed: {
     detailDrawerVisible() {
       return this.$store.getters.detailDrawerVisible;

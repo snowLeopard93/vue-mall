@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "My-Breadcrumb",
+  name: "MyBreadcrumb",
   computed: {
     breadcrumbList() {
       return this.$store.getters.currentMenu;

@@ -39,7 +39,7 @@
     </a-layout>
 
     <Authorized :authority="['admin']">
-      <SettingDrawer />
+      <MySettingDrawer />
     </Authorized>
   </div>
 </template>
@@ -48,7 +48,7 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import SiderMenu from "./SiderMenu";
-import SettingDrawer from "../components/SettingDrawer";
+import MySettingDrawer from "../components/SettingDrawer";
 import MyBreadcrumb from "../components/Breadcrumb";
 
 export default {
@@ -65,7 +65,7 @@ export default {
     Header,
     Footer,
     SiderMenu,
-    SettingDrawer,
+    MySettingDrawer,
     MyBreadcrumb
   }
 };

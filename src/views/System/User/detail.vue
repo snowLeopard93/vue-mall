@@ -1,10 +1,10 @@
 <template>
   <div>
-    <DetailDrawer>
+    <MyDetailDrawer>
       <template v-slot:content>
         aaaaaa
       </template>
-    </DetailDrawer>
+    </MyDetailDrawer>
   </div>
 </template>
 

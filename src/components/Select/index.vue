@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: "index",
+  name: "MySelect",
   props: {
     dataSource: {
       type: Array,
