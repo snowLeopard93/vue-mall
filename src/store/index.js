@@ -1,40 +1,20 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
+import system from "./modules/system";
+import user from "./modules/user";
+import role from "./modules/role";
+import notice from "./modules/notice";
+import log from "./modules/log";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
-    collapsed: false,
-    currentMenu: [],
-    detailDrawerVisible: false
-  },
-  mutations: {
-    changeCollapsed(state, collapsed) {
-      state.collapsed = collapsed;
-    },
-    chaneCurrentMenu(state, menu) {
-      menu = menu.filter(item => {
-        return item.title;
-      });
-      state.currentMenu = menu;
-    },
-    changeDetailDrawerVisible(state, visible) {
-      console.log("changeDetailDrawerVisible");
-      state.detailDrawerVisible = visible;
-    }
-  },
-  getters: {
-    collapsed: state => {
-      return state.collapsed;
-    },
-    currentMenu: state => {
-      return state.currentMenu;
-    },
-    detailDrawerVisible: state => {
-      return state.detailDrawerVisible;
-    }
-  },
-  actions: {},
-  modules: {}
+  modules: {
+    system: system,
+    user: user,
+    role: role,
+    notice: notice,
+    log: log
+  }
 });

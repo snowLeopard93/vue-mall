@@ -55,7 +55,7 @@ export default {
   name: "BasicLayout",
   computed: {
     collapsed() {
-      return this.$store.getters.collapsed;
+      return this.$store.state.system.collapsed;
     },
     navTheme() {
       return this.$route.query.navTheme || "dark";

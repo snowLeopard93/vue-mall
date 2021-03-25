@@ -29,13 +29,12 @@ export default {
   name: "MyDetailDrawer",
   computed: {
     detailDrawerVisible() {
-      return this.$store.getters.detailDrawerVisible;
+      return this.$store.state.system.detailDrawerVisible;
     }
   },
   methods: {
     onClose() {
-      console.log("detailDrawerClose");
-      this.$store.commit("changeDetailDrawerVisible", false);
+      this.$store.commit("system/changeDetailDrawerVisible", false);
     }
   }
 };

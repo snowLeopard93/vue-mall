@@ -13,7 +13,7 @@ export default {
   name: "MyBreadcrumb",
   computed: {
     breadcrumbList() {
-      return this.$store.getters.currentMenu;
+      return this.$store.state.system.currentMenu;
     }
   }
 };

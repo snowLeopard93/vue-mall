@@ -163,7 +163,7 @@ export default {
       this.userList = data;
     },
     dbClickRow() {
-      this.$store.commit("changeDetailDrawerVisible", true);
+      this.$store.commit("system/changeDetailDrawerVisible", true);
     }
   }
 };

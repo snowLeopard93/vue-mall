@@ -48,7 +48,7 @@ export default {
   methods: {
     changeCollapsed() {
       this.collapsed = !this.collapsed;
-      this.$store.commit("changeCollapsed", this.collapsed);
+      this.$store.commit("system/changeCollapsed", this.collapsed);
     },
     changeLocale({ key }) {
       this.$router.push({ query: { ...this.$route.query, locale: key } });

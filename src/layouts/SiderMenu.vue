@@ -131,7 +131,7 @@ export default {
       return menuData;
     },
     getAllPath(allPath = []) {
-      this.$store.commit("chaneCurrentMenu", allPath);
+      this.$store.commit("system/chaneCurrentMenu", allPath);
     }
   }
 };
