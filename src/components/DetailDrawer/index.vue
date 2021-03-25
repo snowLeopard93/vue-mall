@@ -25,13 +25,18 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "MyDetailDrawer",
-  computed: {
-    detailDrawerVisible() {
-      return this.$store.state.system.detailDrawerVisible;
-    }
-  },
+  computed: mapState({
+    detailDrawerVisible: state => state.system.detailDrawerVisible
+  }),
+  // computed: {
+  //   detailDrawerVisible() {
+  //     return this.$store.state.system.detailDrawerVisible;
+  //   }
+  // },
   methods: {
     onClose() {
       this.$store.commit("system/changeDetailDrawerVisible", false);
