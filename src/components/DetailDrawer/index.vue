@@ -1,26 +1,13 @@
 <template>
   <div>
     <a-drawer
-      title="Create a new account"
-      :width="720"
-      :visible="detailDrawerVisible"
+      :title="title"
+      :width="width"
+      :visible="visible"
       :body-style="{ paddingBottom: '80px' }"
       @close="onClose"
     >
-      <slot name="content"> </slot>
-      <div
-        :style="{
-          position: 'absolute',
-          right: 0,
-          bottom: 0,
-          width: '100%',
-          borderTop: '1px solid #e9e9e9',
-          padding: '10px 16px',
-          background: '#fff',
-          textAlign: 'right',
-          zIndex: 1
-        }"
-      ></div>
+      <slot name="content"></slot>
     </a-drawer>
   </div>
 </template>
@@ -29,8 +16,20 @@ import { mapState } from "vuex";
 
 export default {
   name: "MyDetailDrawer",
+  props: {
+    title: {
+      type: String,
+      required: false,
+      default: () => "查看详情"
+    },
+    width: {
+      type: String,
+      required: false,
+      default: () => "720px"
+    }
+  },
   computed: mapState({
-    detailDrawerVisible: state => state.system.detailDrawerVisible
+    visible: state => state.system.detailDrawerVisible
   }),
   // computed: {
   //   detailDrawerVisible() {

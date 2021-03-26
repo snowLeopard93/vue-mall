@@ -16,7 +16,6 @@ export default {
       state.currentMenu = menu;
     },
     changeDetailDrawerVisible(state, visible) {
-      console.log("changeDetailDrawerVisible");
       state.detailDrawerVisible = visible;
     }
   },

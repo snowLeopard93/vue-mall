@@ -162,7 +162,8 @@ export default {
       });
       this.userList = data;
     },
-    dbClickRow() {
+    dbClickRow(data) {
+      this.$store.commit("user/getCurrentSelectUser", data);
       this.$store.commit("system/changeDetailDrawerVisible", true);
     }
   }
