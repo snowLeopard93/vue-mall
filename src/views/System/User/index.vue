@@ -35,8 +35,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import UserDetail from "./detail";
-import axios from "axios";
 
 export default {
   name: "User",
@@ -119,10 +119,12 @@ export default {
       ],
       searchParams: {},
       searchUserName: "",
-      userList: [],
       detailVisible: false
     };
   },
+  computed: mapState({
+    userList: state => state.user.userList
+  }),
   methods: {
     changeSearchStatus(data) {
       this.searchParams.status = data;
@@ -138,29 +140,7 @@ export default {
     },
     getUserData() {
       const params = this.searchParams;
-      axios({
-        url: "api/system/user",
-        method: "post",
-        params: params
-      }).then(response => {
-        this.formatUserData(response.data);
-      });
-    },
-    formatUserData(data = []) {
-      data.forEach(item => {
-        switch (item.status) {
-          case "1":
-            item.showStatus = "正常";
-            break;
-          case "2":
-            item.showStatus = "已锁定";
-            break;
-          default:
-            item.showStatus = "";
-            break;
-        }
-      });
-      this.userList = data;
+      this.$store.dispatch("user/getUserList", params);
     },
     dbClickRow(data) {
       this.$store.commit("user/getCurrentSelectUser", data);
