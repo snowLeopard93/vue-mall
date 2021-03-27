@@ -33,7 +33,7 @@ export default {
     }
   },
   getters: {
-    getCurrentSelectOrder: state => {
+    currentSelectOrder: state => {
       return state.currentSelectOrder;
     }
   },
