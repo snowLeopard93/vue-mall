@@ -28,7 +28,7 @@
     <MyTable
       :columns="columns"
       :data-source="noticeList"
-      @dblclick="dbClickRow"
+      @dbClickRow="dbClickRow"
     />
     <NoticeDetail />
   </div>
@@ -39,7 +39,7 @@ import NoticeDetail from "./detail";
 import { mapState } from "vuex";
 
 export default {
-  name: "index",
+  name: "Notice",
   components: {
     NoticeDetail
   },
@@ -129,6 +129,7 @@ export default {
       this.$store.dispatch("notice/getNoticeList", params);
     },
     dbClickRow(data) {
+      console.log("bbb");
       this.$store.commit("notice/getCurrentSelectNotice", data);
       this.$store.commit("system/changeDetailDrawerVisible", true);
     }
