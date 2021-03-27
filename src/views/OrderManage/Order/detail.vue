@@ -16,7 +16,12 @@
         </div>
       </template>
       <template v-slot:otherContent>
-        <div style="height:500px" id="mapContainer" tabindex="0"></div>
+        <div
+          v-if="visible"
+          style="height:500px"
+          id="mapContainer"
+          tabindex="0"
+        ></div>
       </template>
     </MyDetailDrawer>
   </div>
@@ -41,7 +46,6 @@ export default {
       return this.$store.state.order.currentSelectOrder;
     },
     visible() {
-      console.log(this.$store);
       if (this.$store.getters["system/detailDrawerVisible"]) {
         this.initAMap();
       }

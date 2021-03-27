@@ -8,6 +8,11 @@
       @close="onClose"
     >
       <slot name="content"></slot>
+
+      <div>
+        <a-divider />
+        <slot name="otherContent"></slot>
+      </div>
     </a-drawer>
   </div>
 </template>
@@ -31,11 +36,6 @@ export default {
   computed: mapState({
     visible: state => state.system.detailDrawerVisible
   }),
-  // computed: {
-  //   detailDrawerVisible() {
-  //     return this.$store.state.system.detailDrawerVisible;
-  //   }
-  // },
   methods: {
     onClose() {
       this.$store.commit("system/changeDetailDrawerVisible", false);
