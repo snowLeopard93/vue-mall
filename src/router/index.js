@@ -9,6 +9,7 @@ import { check, isLogin } from "../utils/auth";
 import { notification } from "ant-design-vue";
 
 import systemRoutes from "./system";
+import orderManageRoutes from "./orderManage";
 
 Vue.use(VueRouter);
 
@@ -69,7 +70,6 @@ let defaultRoutes = [
           }
         ]
       },
-
       {
         path: "/form",
         name: "form",
@@ -155,7 +155,7 @@ let defaultRoutes = [
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes: [...defaultRoutes, ...systemRoutes]
+  routes: [...defaultRoutes, ...systemRoutes, ...orderManageRoutes]
 });
 
 router.beforeEach((to, from, next) => {
