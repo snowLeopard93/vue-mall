@@ -25,18 +25,30 @@
         </a-button>
       </template>
     </MyToolBar>
-    <MyTable :columns="columns" :data-source="noticeList" />
+    <MyTable
+      :columns="columns"
+      :data-source="noticeList"
+      @dblclick="dbClickRow"
+    />
+    <NoticeDetail />
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import NoticeDetail from "./detail";
+import { mapState } from "vuex";
 
 export default {
   name: "index",
+  components: {
+    NoticeDetail
+  },
   mounted() {
     this.getNoticeData();
   },
+  computed: mapState({
+    noticeList: state => state.notice.noticeList
+  }),
   data() {
     return {
       columns: [
@@ -96,8 +108,7 @@ export default {
         }
       ],
       searchParams: {},
-      searchTitle: "",
-      noticeList: []
+      searchTitle: ""
     };
   },
   methods: {
@@ -115,32 +126,11 @@ export default {
     },
     getNoticeData() {
       const params = this.searchParams;
-      axios({
-        url: "api/system/notice",
-        method: "post",
-        params: params
-      }).then(response => {
-        this.formatNoticeData(response.data);
-      });
+      this.$store.dispatch("notice/getNoticeList", params);
     },
-    formatNoticeData(data = []) {
-      data.forEach(item => {
-        switch (item.status) {
-          case "1":
-            item.showStatus = "待提交";
-            break;
-          case "2":
-            item.showStatus = "待审核";
-            break;
-          case "3":
-            item.showStatus = "已发布";
-            break;
-          default:
-            item.showStatus = "";
-            break;
-        }
-      });
-      this.noticeList = data;
+    dbClickRow(data) {
+      this.$store.commit("notice/getCurrentSelectNotice", data);
+      this.$store.commit("system/changeDetailDrawerVisible", true);
     }
   }
 };
