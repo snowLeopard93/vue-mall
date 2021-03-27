@@ -9,18 +9,30 @@
       <template v-slot:leftToolBar />
       <template v-slot:rightToolBar />
     </MyToolBar>
-    <MyTable :columns="columns" :data-source="logList" />
+    <MyTable
+      :columns="columns"
+      :data-source="logList"
+      @dbClickRow="dbClickRow"
+    />
+    <LogDetail />
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import { mapState } from "vuex";
+import LogDetail from "./detail";
 
 export default {
   name: "Log",
+  components: {
+    LogDetail
+  },
   mounted() {
     this.getLogData();
   },
+  computed: mapState({
+    logList: state => state.log.logList
+  }),
   data() {
     return {
       columns: [
@@ -50,7 +62,6 @@ export default {
         }
       ],
       searchParams: {},
-      logList: [],
       searchInputPlaceholder: "请输入日志名称"
     };
   },
@@ -65,13 +76,11 @@ export default {
     },
     getLogData() {
       const params = this.searchParams;
-      axios({
-        url: "api/system/log",
-        method: "post",
-        params: params
-      }).then(response => {
-        this.logList = response.data;
-      });
+      this.$store.dispatch("log/getLogList", params);
+    },
+    dbClickRow(data) {
+      this.$store.commit("log/getCurrentSelectLog", data);
+      this.$store.commit("system/changeDetailDrawerVisible", true);
     }
   }
 };
