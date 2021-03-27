@@ -19,15 +19,24 @@
         </a-button>
       </template>
     </MyToolBar>
-    <MyTable :columns="columns" :data-source="roleList" />
+    <MyTable
+      :columns="columns"
+      :data-source="roleList"
+      @dbClickRow="dbClickRow"
+    />
+    <RoleDetail />
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import { mapState } from "vuex";
+import RoleDetail from "./detail";
 
 export default {
   name: "Role",
+  components: {
+    RoleDetail
+  },
   mounted() {
     this.getRoleData();
   },
@@ -60,10 +69,12 @@ export default {
         }
       ],
       searchParams: {},
-      searchRoleName: "",
-      roleList: []
+      searchRoleName: ""
     };
   },
+  computed: mapState({
+    roleList: state => state.role.roleList
+  }),
   methods: {
     changeSearchRoleName() {
       this.searchParams.roleName = this.searchRoleName;
@@ -75,13 +86,11 @@ export default {
     },
     getRoleData() {
       const params = this.searchParams;
-      axios({
-        url: "api/system/role",
-        method: "post",
-        params: params
-      }).then(response => {
-        this.roleList = response.data;
-      });
+      this.$store.dispatch("role/getRoleList", params);
+    },
+    dbClickRow(data) {
+      this.$store.commit("role/getCurrentSelectRole", data);
+      this.$store.commit("system/changeDetailDrawerVisible", true);
     }
   }
 };
