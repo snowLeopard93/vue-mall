@@ -3,7 +3,7 @@
     <MyDetailDrawer :title="title">
       <template v-slot:content>
         <div class="orderDetail-box">
-          <div class="orderDetail-label">订单id：{{ visible }}</div>
+          <div class="orderDetail-label">订单id：</div>
           <div class="orderDetail-detail">{{ order.orderId }}</div>
           <div class="orderDetail-label">订单号：</div>
           <div class="orderDetail-detail">{{ order.orderNum }}</div>
