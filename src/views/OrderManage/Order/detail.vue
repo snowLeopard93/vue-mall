@@ -29,7 +29,7 @@
 
 <script>
 import AMap from "AMap";
-// import { mapState } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "OrderDetail",
@@ -38,33 +38,29 @@ export default {
       title: "查看详情"
     };
   },
-  // computed: mapState({
-  //   order: state => state.order.currentSelectOrder
-  // }),
-  computed: {
-    order() {
-      return this.$store.state.order.currentSelectOrder;
-    },
+  computed: mapState({
+    order: state => state.order.currentSelectOrder,
+    visible: state => state.system.detailDrawerVisible
+  }),
+  watch: {
     visible() {
-      if (this.$store.getters["system/detailDrawerVisible"]) {
+      // 确保dom加载完再执行渲染地图的操作
+      this.$nextTick(() => {
         this.initAMap();
-      }
-      return this.$store.getters["system/detailDrawerVisible"];
+      });
     }
   },
   methods: {
     initAMap() {
-      setTimeout(() => {
-        let map = new AMap.Map("mapContainer", {
-          center: [119.306345, 26.079131],
-          resizeEnable: true,
-          zoom: 10,
-          lang: "zh_cn"
-        });
-        AMap.plugin(["AMap.ToolBar", "AMap.Scale"], function() {
-          map.addControl(new AMap.ToolBar());
-          map.addControl(new AMap.Scale());
-        });
+      let map = new AMap.Map("mapContainer", {
+        center: [119.306345, 26.079131],
+        resizeEnable: true,
+        zoom: 10,
+        lang: "zh_cn"
+      });
+      AMap.plugin(["AMap.ToolBar", "AMap.Scale"], function() {
+        map.addControl(new AMap.ToolBar());
+        map.addControl(new AMap.Scale());
       });
     }
   }
