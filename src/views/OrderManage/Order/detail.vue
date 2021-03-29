@@ -44,23 +44,38 @@ export default {
   }),
   watch: {
     visible() {
-      // 确保dom加载完再执行渲染地图的操作
-      this.$nextTick(() => {
-        this.initAMap();
-      });
+      if (this.visible) {
+        // 确保dom加载完再执行渲染地图的操作
+        this.$nextTick(() => {
+          console.log(this.order);
+          this.initAMap();
+        });
+      }
     }
   },
   methods: {
     initAMap() {
+      const startLngLat = this.order.startLngLat;
+      const endLngLat = this.order.endLngLat;
       let map = new AMap.Map("mapContainer", {
-        center: [119.306345, 26.079131],
         resizeEnable: true,
         zoom: 10,
         lang: "zh_cn"
       });
-      AMap.plugin(["AMap.ToolBar", "AMap.Scale"], function() {
+      AMap.plugin(["AMap.ToolBar", "AMap.Scale", "AMap.Driving"], function() {
         map.addControl(new AMap.ToolBar());
         map.addControl(new AMap.Scale());
+        var driving = new AMap.Driving({
+          map: map,
+          // 驾车路线规划策略，AMap.DrivingPolicy.LEAST_TIME是最快捷模式
+          policy: AMap.DrivingPolicy.LEAST_TIME
+        });
+
+        driving.search(startLngLat, endLngLat, function(status, result) {
+          // 未出错时，result即是对应的路线规划方案
+          console.log(status);
+          console.log(result);
+        });
       });
     }
   }

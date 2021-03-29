@@ -78,6 +78,24 @@ export default {
           key: "ctime"
         },
         {
+          title: "起始点坐标",
+          dataIndex: "startLngLat",
+          key: "startLngLat",
+          colSpan: 0,
+          customRender: function(text, record) {
+            return record.startLngLat;
+          }
+        },
+        {
+          title: "结束点坐标",
+          dataIndex: "endLngLat",
+          key: "endLngLat",
+          colSpan: 0,
+          customRender: function(text, record) {
+            return record.endLngLat;
+          }
+        },
+        {
           title: "操作",
           key: "action"
         }
