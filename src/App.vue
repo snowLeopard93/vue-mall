@@ -10,12 +10,17 @@ import zhCN from "ant-design-vue/lib/locale-provider/zh_CN";
 import enUS from "ant-design-vue/lib/locale-provider/en_US";
 import moment from "moment";
 import "moment/locale/zh-cn";
+import { initDB } from "./utils/indexedDB";
 
 export default {
   data() {
     return {
       locale: zhCN
     };
+  },
+  mounted() {
+    // 初始化 indexeddb 数据库
+    initDB();
   },
   watch: {
     "$route.query.locale": function(val) {
