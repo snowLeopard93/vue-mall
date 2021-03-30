@@ -2,9 +2,16 @@
   <div>
     <MyToolBar>
       <template v-slot:leftToolBar>
-        <a-button type="primary" @click="getUserData">
-          <IconFont type="icon-refresh" style="font-size: 14px;" />
-        </a-button>
+        <div class="leftToolBar-item">
+          <a-button type="primary" @click="getUserData">
+            <IconFont type="icon-refresh" style="font-size: 14px;" />
+          </a-button>
+        </div>
+        <div class="leftToolBar-item">
+          <a-button type="primary" @click="addUser">
+            <IconFont type="icon-add" style="font-size: 14px;" />
+          </a-button>
+        </div>
       </template>
       <template v-slot:rightToolBar>
         <div class="searchForm-item">
@@ -31,6 +38,9 @@
       @dbClickRow="dbClickRow"
     />
     <UserDetail />
+    <div v-show="showTips" style="position: absolute;top: 75px;right: 0;">
+      <a-alert message="功能开发中，请耐心等待~~" :banner="true" closable />
+    </div>
   </div>
 </template>
 
@@ -119,7 +129,8 @@ export default {
       ],
       searchParams: {},
       searchUserName: "",
-      detailVisible: false
+      detailVisible: false,
+      showTips: false
     };
   },
   computed: mapState({
@@ -145,6 +156,58 @@ export default {
     dbClickRow(data) {
       this.$store.commit("user/getCurrentSelectUser", data);
       this.$store.commit("system/changeDetailDrawerVisible", true);
+    },
+    addUser() {
+      this.showTips = true;
+      // let params = {
+      //   key: 2,
+      //   loginName: "李四",
+      //   userName: "李四",
+      //   email: "8511646576@qq.com",
+      //   telPhone: "18709897890",
+      //   status: "2",
+      //   createTime: "2021-02-15 12:00:00",
+      //   address: "福建省厦门市",
+      //   remark:
+      //     "备注2备注2备注2备注2备注2备注2备注2备注2备注2备注2备注2备注2备注2备注2备注2备注2备注2备注2备注2备注2备注2备注2备注2备注2"
+      // };
+      // let params = {
+      //   key: 3,
+      //   loginName: "王五",
+      //   userName: "王五",
+      //   email: "2511646576@qq.com",
+      //   telPhone: "15709897890",
+      //   status: "1",
+      //   createTime: "2021-02-15 09:00:00",
+      //   address: "福建省福州市",
+      //   remark:
+      //     "备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1"
+      // };
+      // let params = {
+      //   key: 4,
+      //   loginName: "赵六",
+      //   userName: "赵六",
+      //   email: "2511646576@qq.com",
+      //   telPhone: "15709897890",
+      //   status: "2",
+      //   createTime: "2021-02-15 09:00:00",
+      //   address: "福建省福州市",
+      //   remark:
+      //     "备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1"
+      // };
+      // let params = {
+      //   key: 5,
+      //   loginName: "张三1",
+      //   userName: "张三1",
+      //   email: "2511646576@qq.com",
+      //   telPhone: "15709897890",
+      //   status: "1",
+      //   createTime: "2021-02-15 09:00:00",
+      //   address: "福建省福州市",
+      //   remark:
+      //     "备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1备注1"
+      // };
+      // this.$store.dispatch("user/addUser", params);
     }
   }
 };

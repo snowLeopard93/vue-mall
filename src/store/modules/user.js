@@ -1,4 +1,5 @@
-import axios from "axios";
+// import axios from "axios";
+import { add, read } from "../../utils/indexedDB";
 
 export default {
   namespaced: true,
@@ -35,13 +36,31 @@ export default {
   actions: {
     getUserList({ commit }, params) {
       console.log(params);
-      axios({
-        url: "api/system/user",
-        method: "post",
-        params: params
-      }).then(response => {
-        commit("getUserList", response.data);
-      });
+      // axios({
+      //   url: "api/system/user",
+      //   method: "post",
+      //   params: params
+      // }).then(response => {
+      //   commit("getUserList", response.data);
+      // });
+      let request = read("user");
+      request.onsuccess = event => {
+        console.log(request.result);
+        console.log("读取成功！", event);
+        commit("getUserList", request.result);
+      };
+    },
+    addUser({ commit }, params) {
+      let request = add("user", params);
+      request.onsuccess = event => {
+        console.log("写入成功！", event);
+        let readRequest = read("user");
+        readRequest.onsuccess = event => {
+          console.log(readRequest.result);
+          console.log("读取成功！", event);
+          commit("getUserList", readRequest.result);
+        };
+      };
     }
   },
   modules: {}

@@ -18,7 +18,8 @@ import {
   ConfigProvider,
   BackTop,
   Select,
-  Divider
+  Divider,
+  Alert
 } from "ant-design-vue";
 import VueI18n from "vue-i18n";
 import Auth from "./directives/auth";
@@ -50,12 +51,13 @@ Vue.use(ConfigProvider);
 Vue.use(BackTop);
 Vue.use(Select);
 Vue.use(Divider);
+Vue.use(Alert);
 
 Vue.use(VueI18n);
 Vue.use(Auth);
 
 const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: "//at.alicdn.com/t/font_2376320_l0clbsfjzc.js" // 在 iconfont.cn 上生成
+  scriptUrl: "//at.alicdn.com/t/font_2376320_d0zsgzccqm5.js" // 在 iconfont.cn 上生成
 });
 
 Vue.component("Authorized", Authorized);
