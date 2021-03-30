@@ -1,4 +1,4 @@
-var _ = require("underscore");
+let _ = require("underscore");
 function userData(req) {
   let method = req.method;
   let query = req.query;
@@ -205,8 +205,8 @@ function userData(req) {
       ];
   }
 
-  var keys = _.keys(query);
-  var filterParams = {};
+  let keys = _.keys(query);
+  let filterParams = {};
   _.each(keys, keyItem => {
     if (query[keyItem]) {
       filterParams[keyItem] = query[keyItem];
