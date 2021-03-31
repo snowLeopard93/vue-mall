@@ -1,3 +1,20 @@
 export default {
+  "app.submitLabel": "Submit",
+  "app.cancelLabel": "Cancel",
+  "app.system.user.loginNameLabel": "loginName",
+  "app.system.user.userNameLabel": "userName",
+  "app.system.user.emailLabel": "email",
+  "app.system.user.telPhoneLabel": "telPhone",
+  "app.system.user.statusLabel": "status",
+  "app.system.user.cTimeLabel": "cTime",
+  "app.system.user.addressLabel": "address",
+  "app.system.user.remarkLabel": "remark",
+  "app.system.user.loginNamePlaceholder": "Please enter loginName",
+  "app.system.user.userNamePlaceholder": "Please enter userName",
+  "app.system.user.emailPlaceholder": "Please enter email",
+  "app.system.user.telPhonePlaceholder": "Please enter telPhone",
+  "app.system.user.statusPlaceholder": "Please choose status",
+  "app.system.user.addressPlaceholder": "Please enter address",
+  "app.system.user.remarkPlaceholder": "Please enter remark",
   "app.dashboard.analysis.timeLabel": "Time"
 };
