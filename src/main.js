@@ -19,7 +19,9 @@ import {
   BackTop,
   Select,
   Divider,
-  Alert
+  Alert,
+  Row,
+  Col
 } from "ant-design-vue";
 import VueI18n from "vue-i18n";
 import Auth from "./directives/auth";
@@ -32,6 +34,7 @@ import MyTable from "./components/Table";
 import MySelect from "./components/Select";
 import MyToolBar from "./layouts/ToolBar";
 import MyDetailDrawer from "./components/DetailDrawer";
+import MyModifyDrawer from "./components/Drawer/ModifyDrawer";
 
 Vue.config.productionTip = false;
 
@@ -52,6 +55,8 @@ Vue.use(BackTop);
 Vue.use(Select);
 Vue.use(Divider);
 Vue.use(Alert);
+Vue.use(Row);
+Vue.use(Col);
 
 Vue.use(VueI18n);
 Vue.use(Auth);
@@ -66,6 +71,7 @@ Vue.component("MyTable", MyTable);
 Vue.component("MySelect", MySelect);
 Vue.component("MyToolBar", MyToolBar);
 Vue.component("MyDetailDrawer", MyDetailDrawer);
+Vue.component("MyModifyDrawer", MyModifyDrawer);
 
 const i18n = new VueI18n({
   locale: queryString.parse(location.search).locale || "zhCN",
