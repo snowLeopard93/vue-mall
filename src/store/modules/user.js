@@ -61,6 +61,9 @@ export default {
           commit("getUserList", readRequest.result);
         };
       };
+      request.onerror = event => {
+        console.log("写入失败", event);
+      };
     }
   },
   modules: {}

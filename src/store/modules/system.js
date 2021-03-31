@@ -1,9 +1,14 @@
 export default {
   namespaced: true,
   state: {
+    // 侧边菜单是否展开
     collapsed: false,
+    // 当前菜单
     currentMenu: [],
-    detailDrawerVisible: false
+    // “查看详情”抽屉是否打开
+    detailDrawerVisible: false,
+    // “新增、修改”抽屉是否打开
+    modifyDrawerVisible: false
   },
   mutations: {
     changeCollapsed(state, collapsed) {
@@ -17,6 +22,9 @@ export default {
     },
     changeDetailDrawerVisible(state, visible) {
       state.detailDrawerVisible = visible;
+    },
+    changeModifyDrawerVisible(state, visible) {
+      state.modifyDrawerVisible = visible;
     }
   },
   getters: {
@@ -28,6 +36,9 @@ export default {
     },
     detailDrawerVisible: state => {
       return state.detailDrawerVisible;
+    },
+    modifyDrawerVisible: state => {
+      return state.modifyDrawerVisible;
     }
   },
   actions: {},

@@ -2,16 +2,12 @@
   <div>
     <MyToolBar>
       <template v-slot:leftToolBar>
-        <div class="leftToolBar-item">
-          <a-button type="primary" @click="getUserData">
-            <IconFont type="icon-refresh" style="font-size: 14px;" />
-          </a-button>
-        </div>
-        <div class="leftToolBar-item">
-          <a-button type="primary" @click="addUser">
-            <IconFont type="icon-add" style="font-size: 14px;" />
-          </a-button>
-        </div>
+        <a-button type="primary" class="button-left" @click="getUserData">
+          <IconFont type="icon-refresh" style="font-size: 14px;" />
+        </a-button>
+        <a-button type="primary" @click="addUser">
+          <IconFont type="icon-add" style="font-size: 14px;" />
+        </a-button>
       </template>
       <template v-slot:rightToolBar>
         <div class="searchForm-item">
@@ -38,6 +34,7 @@
       @dbClickRow="dbClickRow"
     />
     <UserDetail />
+    <UserModify />
     <div v-show="showTips" style="position: absolute;top: 75px;right: 0;">
       <a-alert message="功能开发中，请耐心等待~~" :banner="true" closable />
     </div>
@@ -47,11 +44,13 @@
 <script>
 import { mapState } from "vuex";
 import UserDetail from "./detail";
+import UserModify from "./modify";
 
 export default {
   name: "User",
   components: {
-    UserDetail
+    UserDetail,
+    UserModify
   },
   mounted() {
     this.getUserData();
@@ -158,7 +157,8 @@ export default {
       this.$store.commit("system/changeDetailDrawerVisible", true);
     },
     addUser() {
-      this.showTips = true;
+      // this.showTips = true;
+      this.$store.commit("system/changeModifyDrawerVisible", true);
       // let params = {
       //   key: 2,
       //   loginName: "李四",
