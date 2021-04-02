@@ -87,24 +87,16 @@
 <script>
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
+import {
+  validateTextMaxLen,
+  validateTextareaMaxLen
+} from "../../../utils/validate";
 
 export default {
   name: "UserModify",
   data() {
-    let validateTextMaxLen = (rule, value, callback) => {
-      if (value && value.length > 16) {
-        callback("长度不能大于16");
-      }
-      callback();
-    };
-    let validateTextareaMaxLen = (rule, value, callback) => {
-      if (value && value.length > 64) {
-        callback("长度不能大于64");
-      }
-      callback();
-    };
     return {
-      title: "新增",
+      title: "新增用户",
       ruleForm: {
         loginName: "",
         userName: "",
