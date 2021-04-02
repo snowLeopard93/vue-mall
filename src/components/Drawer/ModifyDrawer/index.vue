@@ -56,7 +56,7 @@ export default {
       this.$emit("submit");
     },
     onClose() {
-      this.$store.commit("system/changeModifyDrawerVisible", false);
+      this.$emit("close");
     }
   }
 };

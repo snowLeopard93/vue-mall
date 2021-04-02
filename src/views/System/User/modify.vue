@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MyModifyDrawer :title="title" @submit="submitForm">
+    <MyModifyDrawer :title="title" @submit="submitForm" @close="close">
       <template v-slot:content>
         <a-form-model ref="ruleForm" :model="ruleForm" :rules="rules">
           <a-row :gutter="16">
@@ -46,11 +46,20 @@
           <a-row :gutter="16">
             <a-col :span="12">
               <a-form-model-item
-                has-feedback
                 :label="$t('message')['app.system.user.statusLabel']"
-                prop="status"
               >
-                <a-input v-model="ruleForm.status" autocomplete="off" />
+                <a-select
+                  v-model="ruleForm.status"
+                  placeholder="please select your zone"
+                >
+                  <a-select-option
+                    v-for="statusItem in statusList"
+                    :key="statusItem.value"
+                    :value="statusItem.value"
+                  >
+                    {{ statusItem.label }}
+                  </a-select-option>
+                </a-select>
               </a-form-model-item>
             </a-col>
             <a-col :span="12">
@@ -126,7 +135,17 @@ export default {
         status: [{ validator: validateTextMaxLen }],
         address: [{ validator: validateTextMaxLen }],
         remark: [{ validator: validateTextareaMaxLen }]
-      }
+      },
+      statusList: [
+        {
+          value: "1",
+          label: "正常"
+        },
+        {
+          value: "2",
+          label: "锁定"
+        }
+      ]
     };
   },
   methods: {
@@ -141,11 +160,16 @@ export default {
           values["createTime"] = createTime;
           this.$store.dispatch("user/addUser", values);
           this.$store.commit("system/changeModifyDrawerVisible", false);
+          this.$refs["ruleForm"].resetFields();
         } else {
           console.log("error submit!!");
           return false;
         }
       });
+    },
+    close() {
+      this.$store.commit("system/changeModifyDrawerVisible", false);
+      this.$refs["ruleForm"].resetFields();
     }
   }
 };
