@@ -21,7 +21,8 @@ import {
   Divider,
   Alert,
   Row,
-  Col
+  Col,
+  FormModel
 } from "ant-design-vue";
 import VueI18n from "vue-i18n";
 import Auth from "./directives/auth";
@@ -57,6 +58,7 @@ Vue.use(Divider);
 Vue.use(Alert);
 Vue.use(Row);
 Vue.use(Col);
+Vue.use(FormModel);
 
 Vue.use(VueI18n);
 Vue.use(Auth);
