@@ -47,59 +47,61 @@ export default {
     this.getOrderData();
   },
   data() {
-    return {
-      columns: [
-        {
-          title: "订单id",
-          dataIndex: "orderId",
-          key: "orderId"
-        },
-        {
-          title: "订单号",
-          dataIndex: "orderNum",
-          key: "orderNum"
-        },
-        {
-          title: "订单名称",
-          dataIndex: "orderName",
-          key: "orderName"
-        },
-        {
-          title: "状态",
-          dataIndex: "status",
-          key: "status",
-          customRender: function(text, record) {
-            return record.showStatus;
-          }
-        },
-        {
-          title: "创建时间",
-          dataIndex: "ctime",
-          key: "ctime"
-        },
-        {
-          title: "起始点坐标",
-          dataIndex: "startLngLat",
-          key: "startLngLat",
-          colSpan: 0,
-          customRender: function(text, record) {
-            return record.startLngLat;
-          }
-        },
-        {
-          title: "结束点坐标",
-          dataIndex: "endLngLat",
-          key: "endLngLat",
-          colSpan: 0,
-          customRender: function(text, record) {
-            return record.endLngLat;
-          }
-        },
-        {
-          title: "操作",
-          key: "action"
+    const columns = [
+      {
+        title: "订单id",
+        dataIndex: "orderId",
+        key: "orderId"
+      },
+      {
+        title: "订单号",
+        dataIndex: "orderNum",
+        key: "orderNum",
+        scopedSlots: { customRender: "orderNum" }
+      },
+      {
+        title: "订单名称",
+        dataIndex: "orderName",
+        key: "orderName"
+      },
+      {
+        title: "状态",
+        dataIndex: "status",
+        key: "status",
+        customRender: function(text, record) {
+          return record.showStatus;
         }
-      ],
+      },
+      {
+        title: "创建时间",
+        dataIndex: "ctime",
+        key: "ctime"
+      },
+      {
+        title: "起始点坐标",
+        dataIndex: "startLngLat",
+        key: "startLngLat",
+        colSpan: 0,
+        customRender: function(text, record) {
+          return record.startLngLat;
+        }
+      },
+      {
+        title: "结束点坐标",
+        dataIndex: "endLngLat",
+        key: "endLngLat",
+        colSpan: 0,
+        customRender: function(text, record) {
+          return record.endLngLat;
+        }
+      },
+      {
+        title: "操作",
+        key: "action"
+      }
+    ];
+    return {
+      columns: columns,
       searchStatusList: [
         {
           id: "",

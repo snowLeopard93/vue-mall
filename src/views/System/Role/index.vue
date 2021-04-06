@@ -41,33 +41,35 @@ export default {
     this.getRoleData();
   },
   data() {
+    const columns = [
+      {
+        title: "角色名",
+        dataIndex: "roleName",
+        key: "roleName",
+        scopedSlots: { customRender: "roleName" }
+      },
+      {
+        title: "角色描述",
+        dataIndex: "desc",
+        key: "desc"
+      },
+      {
+        title: "创建时间",
+        dataIndex: "ctime",
+        key: "ctime"
+      },
+      {
+        title: "修改时间",
+        dataIndex: "mtime",
+        key: "mtime"
+      },
+      {
+        title: "操作",
+        key: "action"
+      }
+    ];
     return {
-      columns: [
-        {
-          title: "角色名",
-          dataIndex: "roleName",
-          key: "roleName"
-        },
-        {
-          title: "角色描述",
-          dataIndex: "desc",
-          key: "desc"
-        },
-        {
-          title: "创建时间",
-          dataIndex: "ctime",
-          key: "ctime"
-        },
-        {
-          title: "修改时间",
-          dataIndex: "mtime",
-          key: "mtime"
-        },
-        {
-          title: "操作",
-          key: "action"
-        }
-      ],
+      columns: columns,
       searchParams: {},
       searchRoleName: ""
     };

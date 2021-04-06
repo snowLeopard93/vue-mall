@@ -34,33 +34,35 @@ export default {
     logList: state => state.log.logList
   }),
   data() {
+    const columns = [
+      {
+        title: "日志名称",
+        dataIndex: "name",
+        key: "name",
+        scopedSlots: { customRender: "name" }
+      },
+      {
+        title: "日志类型",
+        dataIndex: "logType",
+        key: "logType"
+      },
+      {
+        title: "内容",
+        dataIndex: "content",
+        key: "content"
+      },
+      {
+        title: "创建时间",
+        dataIndex: "ctime",
+        key: "ctime"
+      },
+      {
+        title: "操作",
+        key: "action"
+      }
+    ];
     return {
-      columns: [
-        {
-          title: "日志名称",
-          dataIndex: "name",
-          key: "name"
-        },
-        {
-          title: "日志类型",
-          dataIndex: "logType",
-          key: "logType"
-        },
-        {
-          title: "内容",
-          dataIndex: "content",
-          key: "content"
-        },
-        {
-          title: "创建时间",
-          dataIndex: "ctime",
-          key: "ctime"
-        },
-        {
-          title: "操作",
-          key: "action"
-        }
-      ],
+      columns: columns,
       searchParams: {},
       searchInputPlaceholder: "请输入日志名称"
     };
