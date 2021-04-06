@@ -31,7 +31,6 @@
     <MyTable
       :columns="columns"
       :data-source="userList"
-      :column-slots="columnSlots"
       @dbClickRow="dbClickRow"
     />
     <UserDetail />
@@ -54,61 +53,59 @@ export default {
     this.getUserData();
   },
   data() {
-    return {
-      columns: [
-        {
-          title: "登录名",
-          dataIndex: "loginName",
-          key: "loginName",
-          scopedSlots: { customRender: "loginName" }
-        },
-        {
-          title: "用户名",
-          dataIndex: "userName",
-          key: "userName",
-          scopedSlots: { customRender: "userName" }
-        },
-        {
-          title: "邮箱",
-          dataIndex: "email",
-          key: "email",
-          scopedSlots: { customRender: "email" }
-        },
-        {
-          title: "手机号",
-          dataIndex: "telPhone",
-          key: "telPhone"
-        },
-        {
-          title: "状态",
-          dataIndex: "status",
-          key: "status",
-          customRender: function(text, record) {
-            return record.showStatus;
-          }
-        },
-        {
-          title: "创建时间",
-          dataIndex: "createTime",
-          key: "createTime"
-        },
-        {
-          title: "地址",
-          dataIndex: "address",
-          key: "address"
-        },
-        {
-          title: "备注",
-          dataIndex: "remark",
-          key: "remark",
-          noEllipsis: true
-        },
-        {
-          title: "操作",
-          key: "action"
+    const columns = [
+      {
+        title: "登录名",
+        dataIndex: "loginName",
+        key: "loginName",
+        scopedSlots: { customRender: "loginName" }
+      },
+      {
+        title: "用户名",
+        dataIndex: "userName",
+        key: "userName"
+      },
+      {
+        title: "邮箱",
+        dataIndex: "email",
+        key: "email"
+      },
+      {
+        title: "手机号",
+        dataIndex: "telPhone",
+        key: "telPhone"
+      },
+      {
+        title: "状态",
+        dataIndex: "status",
+        key: "status",
+        customRender: function(text, record) {
+          return record.showStatus;
         }
-      ],
-      columnSlots: [{ slotName: "loginName" }],
+      },
+      {
+        title: "创建时间",
+        dataIndex: "createTime",
+        key: "createTime"
+      },
+      {
+        title: "地址",
+        dataIndex: "address",
+        key: "address"
+      },
+      {
+        title: "备注",
+        dataIndex: "remark",
+        key: "remark",
+        noEllipsis: true
+      },
+      {
+        title: "操作",
+        key: "action"
+      }
+    ];
+    return {
+      columns: columns,
       searchStatusList: [
         {
           id: "",

@@ -33,11 +33,6 @@ export default {
       type: Array,
       required: true,
       default: () => {}
-    },
-    columnSlots: {
-      type: Array,
-      required: false,
-      default: () => {}
     }
   },
   data() {
@@ -59,6 +54,7 @@ export default {
   methods: {
     renderColumns() {
       let tableColumns = [];
+      let columnSlots = [];
       this.columns.forEach(item => {
         tableColumns.push({
           title: item.title,
@@ -70,8 +66,13 @@ export default {
           slots: item.slots,
           scopedSlots: item.scopedSlots
         });
+
+        if (item.scopedSlots) {
+          columnSlots.push({ slotName: item.scopedSlots.customRender });
+        }
       });
       this.tableColumns = tableColumns;
+      this.columnSlots = columnSlots;
     },
     handleClickRow(record, index) {
       return {
