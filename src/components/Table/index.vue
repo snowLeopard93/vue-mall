@@ -45,7 +45,8 @@ export default {
         pageSizeOptions: ["5", "10", "15", "20"],
         onShowSizeChange: (current, pageSize) => (this.pageSize = pageSize)
       },
-      tableColumns: []
+      tableColumns: [],
+      columnSlots: []
     };
   },
   mounted() {
