@@ -1,6 +1,7 @@
 export default {
   "app.submitLabel": "Submit",
   "app.cancelLabel": "Cancel",
+  /* 用户管理 */
   "app.system.user.loginNameLabel": "loginName",
   "app.system.user.userNameLabel": "userName",
   "app.system.user.emailLabel": "email",
@@ -16,5 +17,15 @@ export default {
   "app.system.user.statusPlaceholder": "Please choose status",
   "app.system.user.addressPlaceholder": "Please enter address",
   "app.system.user.remarkPlaceholder": "Please enter remark",
+  /* 角色管理 */
+  "app.system.role.roleNameLabel": "roleName",
+  "app.system.role.roleDescLabel": "roleDesc",
+  "app.system.role.statusLabel": "status",
+  "app.system.role.cTimeLabel": "cTime",
+  "app.system.role.mTimeLabel": "mTime",
+  "app.system.role.roleNamePlaceholder": "Please enter roleName",
+  "app.system.role.roleDescPlaceholder": "Please enter roleDesc",
+  "app.system.role.statuscPlaceholder": "Please choose status",
+
   "app.dashboard.analysis.timeLabel": "Time"
 };

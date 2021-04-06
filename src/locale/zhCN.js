@@ -1,6 +1,7 @@
 export default {
   "app.submitLabel": "提交",
   "app.cancelLabel": "取消",
+  /* 用户管理 */
   "app.system.user.loginNameLabel": "登录名",
   "app.system.user.userNameLabel": "用户名",
   "app.system.user.emailLabel": "邮箱",
@@ -16,5 +17,15 @@ export default {
   "app.system.user.statusPlaceholder": "请选择状态",
   "app.system.user.addressPlaceholder": "请输入地址",
   "app.system.user.remarkPlaceholder": "请输入备注",
+  /* 角色管理 */
+  "app.system.role.roleNameLabel": "角色名",
+  "app.system.role.roleDescLabel": "角色描述",
+  "app.system.role.statusLabel": "状态",
+  "app.system.role.cTimeLabel": "创建时间",
+  "app.system.role.mTimeLabel": "修改时间",
+  "app.system.role.roleNamePlaceholder": "请输入角色名",
+  "app.system.role.roleDescPlaceholder": "请输入角色描述",
+  "app.system.role.statuscPlaceholder": "请选择状态",
+
   "app.dashboard.analysis.timeLabel": "时间"
 };
