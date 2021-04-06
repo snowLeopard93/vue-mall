@@ -2,8 +2,11 @@
   <div>
     <MyToolBar>
       <template v-slot:leftToolBar>
-        <a-button type="primary" @click="getRoleData">
+        <a-button type="primary" class="button-left" @click="getRoleData">
           <IconFont type="icon-refresh" style="font-size: 14px;" />
+        </a-button>
+        <a-button type="primary" @click="addRole">
+          <IconFont type="icon-add" style="font-size: 14px;" />
         </a-button>
       </template>
       <template v-slot:rightToolBar>
@@ -25,17 +28,20 @@
       @dbClickRow="dbClickRow"
     />
     <RoleDetail />
+    <RoleModify />
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import RoleDetail from "./detail";
+import RoleModify from "./modify";
 
 export default {
   name: "Role",
   components: {
-    RoleDetail
+    RoleDetail,
+    RoleModify
   },
   mounted() {
     this.getRoleData();
@@ -93,6 +99,9 @@ export default {
     dbClickRow(data) {
       this.$store.commit("role/getCurrentSelectRole", data);
       this.$store.commit("system/changeDetailDrawerVisible", true);
+    },
+    addRole() {
+      this.$store.commit("system/changeModifyDrawerVisible", true);
     }
   }
 };

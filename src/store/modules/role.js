@@ -1,4 +1,5 @@
-import axios from "axios";
+// import axios from "axios";
+import { add, read } from "../../utils/indexedDB";
 
 export default {
   namespaced: true,
@@ -21,13 +22,35 @@ export default {
   },
   actions: {
     getRoleList({ commit }, params) {
-      axios({
-        url: "api/system/role",
-        method: "post",
-        params: params
-      }).then(response => {
-        commit("getRoleList", response.data);
-      });
+      console.log(params);
+      let request = read("role");
+      request.onsuccess = event => {
+        console.log(request.result);
+        console.log("读取成功！", event);
+        commit("getRoleList", request.result);
+      };
+      // axios({
+      //   url: "api/system/role",
+      //   method: "post",
+      //   params: params
+      // }).then(response => {
+      //   commit("getRoleList", response.data);
+      // });
+    },
+    addRole({ commit }, params) {
+      let request = add("role", params);
+      request.onsuccess = event => {
+        console.log("写入成功！", event);
+        let readRequest = read("role");
+        readRequest.onsuccess = event => {
+          console.log(readRequest.result);
+          console.log("读取成功！", event);
+          commit("getRoleList", readRequest.result);
+        };
+      };
+      request.onerror = event => {
+        console.log("写入失败", event);
+      };
     }
   },
   modules: {}
