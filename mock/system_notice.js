@@ -8,7 +8,7 @@ function noticeData(req) {
       res = [
         {
           key: 1,
-          title: "公告1",
+          noticeTitle: "公告1",
           status: "1",
           ctime: "2021-02-15 09:00:00",
           mtime: "2021-02-15 09:00:00",
@@ -16,7 +16,7 @@ function noticeData(req) {
         },
         {
           key: 2,
-          title: "公告2",
+          noticeTitle: "公告2",
           status: "2",
           ctime: "2021-02-15 09:00:00",
           mtime: "2021-02-15 09:00:00",
@@ -24,7 +24,7 @@ function noticeData(req) {
         },
         {
           key: 3,
-          title: "公告3",
+          noticeTitle: "公告3",
           status: "3",
           ctime: "2021-02-15 09:00:00",
           mtime: "2021-02-15 09:00:00",
@@ -36,7 +36,7 @@ function noticeData(req) {
       res = [
         {
           key: 1,
-          title: "公告1",
+          noticeTitle: "公告1",
           status: "1",
           ctime: "2021-02-15 09:00:00",
           mtime: "2021-02-15 09:00:00",
@@ -44,7 +44,7 @@ function noticeData(req) {
         },
         {
           key: 2,
-          title: "公告2",
+          noticeTitle: "公告2",
           status: "2",
           ctime: "2021-02-15 09:00:00",
           mtime: "2021-02-15 09:00:00",
@@ -52,7 +52,7 @@ function noticeData(req) {
         },
         {
           key: 3,
-          title: "公告3",
+          noticeTitle: "公告3",
           status: "3",
           ctime: "2021-02-15 09:00:00",
           mtime: "2021-02-15 09:00:00",

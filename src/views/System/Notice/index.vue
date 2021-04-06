@@ -50,41 +50,43 @@ export default {
     noticeList: state => state.notice.noticeList
   }),
   data() {
-    return {
-      columns: [
-        {
-          title: "标题",
-          dataIndex: "title",
-          key: "title"
-        },
-        {
-          title: "状态",
-          dataIndex: "status",
-          key: "status",
-          customRender: function(text, record) {
-            return record.showStatus;
-          }
-        },
-        {
-          title: "内容",
-          dataIndex: "content",
-          key: "content"
-        },
-        {
-          title: "创建时间",
-          dataIndex: "ctime",
-          key: "ctime"
-        },
-        {
-          title: "修改时间",
-          dataIndex: "mtime",
-          key: "mtime"
-        },
-        {
-          title: "操作",
-          key: "action"
+    const columns = [
+      {
+        title: "标题",
+        dataIndex: "noticeTitle",
+        key: "noticeTitle",
+        scopedSlots: { customRender: "noticeTitle" }
+      },
+      {
+        title: "状态",
+        dataIndex: "status",
+        key: "status",
+        customRender: function(text, record) {
+          return record.showStatus;
         }
-      ],
+      },
+      {
+        title: "内容",
+        dataIndex: "content",
+        key: "content"
+      },
+      {
+        title: "创建时间",
+        dataIndex: "ctime",
+        key: "ctime"
+      },
+      {
+        title: "修改时间",
+        dataIndex: "mtime",
+        key: "mtime"
+      },
+      {
+        title: "操作",
+        key: "action"
+      }
+    ];
+    return {
+      columns: columns,
       searchStatusList: [
         {
           id: "",

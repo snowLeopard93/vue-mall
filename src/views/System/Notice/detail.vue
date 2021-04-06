@@ -4,7 +4,7 @@
       <template v-slot:content>
         <div class="noticeDetail-box">
           <div class="noticeDetail-label">标题：</div>
-          <div class="noticeDetail-detail">{{ notice.title }}</div>
+          <div class="noticeDetail-detail">{{ notice.noticeTitle }}</div>
           <div class="noticeDetail-label">状态：</div>
           <div class="noticeDetail-detail">{{ notice.showStatus }}</div>
           <div class="noticeDetail-label">创建时间：</div>
