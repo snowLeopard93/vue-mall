@@ -10,7 +10,13 @@
                 :label="$t('message')['app.system.user.loginNameLabel']"
                 prop="loginName"
               >
-                <a-input v-model="ruleForm.loginName" autocomplete="off" />
+                <a-input
+                  v-model="ruleForm.loginName"
+                  autocomplete="off"
+                  :placeholder="
+                    $t('message')['app.system.user.loginNamePlaceholder']
+                  "
+                />
               </a-form-model-item>
             </a-col>
             <a-col :span="12">
@@ -19,7 +25,13 @@
                 :label="$t('message')['app.system.user.userNameLabel']"
                 prop="userName"
               >
-                <a-input v-model="ruleForm.userName" autocomplete="off" />
+                <a-input
+                  v-model="ruleForm.userName"
+                  autocomplete="off"
+                  :placeholder="
+                    $t('message')['app.system.user.userNamePlaceholder']
+                  "
+                />
               </a-form-model-item>
             </a-col>
           </a-row>
@@ -30,7 +42,13 @@
                 :label="$t('message')['app.system.user.emailLabel']"
                 prop="email"
               >
-                <a-input v-model="ruleForm.email" autocomplete="off" />
+                <a-input
+                  v-model="ruleForm.email"
+                  autocomplete="off"
+                  :placeholder="
+                    $t('message')['app.system.user.emailPlaceholder']
+                  "
+                />
               </a-form-model-item>
             </a-col>
             <a-col :span="12">
@@ -39,7 +57,13 @@
                 :label="$t('message')['app.system.user.telPhoneLabel']"
                 prop="telPhone"
               >
-                <a-input v-model="ruleForm.telPhone" autocomplete="off" />
+                <a-input
+                  v-model="ruleForm.telPhone"
+                  autocomplete="off"
+                  :placeholder="
+                    $t('message')['app.system.user.telPhonePlaceholder']
+                  "
+                />
               </a-form-model-item>
             </a-col>
           </a-row>
@@ -48,18 +72,10 @@
               <a-form-model-item
                 :label="$t('message')['app.system.user.statusLabel']"
               >
-                <a-select
-                  v-model="ruleForm.status"
-                  placeholder="please select your zone"
-                >
-                  <a-select-option
-                    v-for="statusItem in statusList"
-                    :key="statusItem.value"
-                    :value="statusItem.value"
-                  >
-                    {{ statusItem.label }}
-                  </a-select-option>
-                </a-select>
+                <MySelect
+                  :dataSource="statusList"
+                  @handleChange="changeStatus"
+                />
               </a-form-model-item>
             </a-col>
             <a-col :span="12">
@@ -68,7 +84,13 @@
                 :label="$t('message')['app.system.user.addressLabel']"
                 prop="address"
               >
-                <a-input v-model="ruleForm.address" autocomplete="off" />
+                <a-input
+                  v-model="ruleForm.address"
+                  autocomplete="off"
+                  :placeholder="
+                    $t('message')['app.system.user.addressPlaceholder']
+                  "
+                />
               </a-form-model-item>
             </a-col>
           </a-row>
@@ -83,6 +105,9 @@
                   v-model="ruleForm.remark"
                   autocomplete="off"
                   :rows="4"
+                  :placeholder="
+                    $t('message')['app.system.user.remarkPlaceholder']
+                  "
                 />
               </a-form-model-item>
             </a-col>
@@ -149,6 +174,9 @@ export default {
     };
   },
   methods: {
+    changeStatus(data) {
+      this.ruleForm.status = data;
+    },
     submitForm() {
       this.$refs["ruleForm"].validate(valid => {
         if (valid) {

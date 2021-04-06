@@ -3,7 +3,7 @@
     show-search
     placeholder="请选择"
     option-filter-prop="children"
-    style="width: 200px"
+    style="width: 100%"
     :filter-option="filterOption"
     @focus="handleFocus"
     @blur="handleBlur"
