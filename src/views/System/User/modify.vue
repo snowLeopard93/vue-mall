@@ -73,7 +73,7 @@
                 :label="$t('message')['app.system.user.statusLabel']"
               >
                 <MySelect
-                  :dataSource="statusList"
+                  :data-source="statusList"
                   @handleChange="changeStatus"
                 />
               </a-form-model-item>
