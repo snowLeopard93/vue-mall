@@ -7,6 +7,15 @@
       :scroll="{ x: 1000, y: 490 }"
       :customRow="handleClickRow"
     >
+      <a
+        v-for="slotItem in columnSlots"
+        :slot="slotItem.slotName"
+        :key="slotItem.slotName"
+        slot-scope="text, record"
+        @click="handleCellClick(record)"
+      >
+        {{ text }}
+      </a>
     </a-table>
   </div>
 </template>
@@ -23,6 +32,11 @@ export default {
     dataSource: {
       type: Array,
       required: true,
+      default: () => {}
+    },
+    columnSlots: {
+      type: Array,
+      required: false,
       default: () => {}
     }
   },
@@ -62,15 +76,17 @@ export default {
     handleClickRow(record, index) {
       return {
         on: {
+          click: () => {
+            console.log("行单击事件", record, index);
+          },
           dblclick: () => {
-            console.log(record, index);
-            console.log("点击行内容record", record);
-            console.log("序号索引index", index);
-
-            this.$emit("dbClickRow", record);
+            console.log("行双击事件", record, index);
           }
         }
       };
+    },
+    handleCellClick(record) {
+      this.$emit("dbClickRow", record);
     }
   }
 };

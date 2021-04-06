@@ -31,13 +31,11 @@
     <MyTable
       :columns="columns"
       :data-source="userList"
+      :column-slots="columnSlots"
       @dbClickRow="dbClickRow"
     />
     <UserDetail />
     <UserModify />
-    <div v-show="showTips" style="position: absolute;top: 75px;right: 0;">
-      <a-alert message="功能开发中，请耐心等待~~" :banner="true" closable />
-    </div>
   </div>
 </template>
 
@@ -62,18 +60,19 @@ export default {
           title: "登录名",
           dataIndex: "loginName",
           key: "loginName",
-          slots: { title: "customTitle" },
           scopedSlots: { customRender: "loginName" }
         },
         {
           title: "用户名",
           dataIndex: "userName",
-          key: "userName"
+          key: "userName",
+          scopedSlots: { customRender: "userName" }
         },
         {
           title: "邮箱",
           dataIndex: "email",
-          key: "email"
+          key: "email",
+          scopedSlots: { customRender: "email" }
         },
         {
           title: "手机号",
@@ -109,6 +108,7 @@ export default {
           key: "action"
         }
       ],
+      columnSlots: [{ slotName: "loginName" }],
       searchStatusList: [
         {
           id: "",
@@ -128,8 +128,7 @@ export default {
       ],
       searchParams: {},
       searchUserName: "",
-      detailVisible: false,
-      showTips: false
+      detailVisible: false
     };
   },
   computed: mapState({
