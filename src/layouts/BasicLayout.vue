@@ -37,10 +37,6 @@
       </a-layout>
       <a-back-top :visibilityHeight="50" />
     </a-layout>
-
-    <Authorized :authority="['admin']">
-      <MySettingDrawer />
-    </Authorized>
   </div>
 </template>
 
@@ -48,7 +44,6 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import SiderMenu from "./SiderMenu";
-import MySettingDrawer from "../components/SettingDrawer";
 import MyBreadcrumb from "../components/Breadcrumb";
 
 export default {
@@ -65,7 +60,6 @@ export default {
     Header,
     Footer,
     SiderMenu,
-    MySettingDrawer,
     MyBreadcrumb
   }
 };
