@@ -9,7 +9,21 @@
       />
     </div>
     <div class="header-logo">Ant Design Vue Mall</div>
-    <div class="header-locale">
+    <div class="header-theme" title="主题切换">
+      <IconFont
+        type="icon-switch-on"
+        style="font-size: 30px;"
+        v-show="headerTheme === 'dark'"
+        @click="changeTheme('light')"
+      />
+      <IconFont
+        type="icon-switch-off"
+        style="font-size: 30px;"
+        v-show="headerTheme === 'light'"
+        @click="changeTheme('dark')"
+      />
+    </div>
+    <!-- <div class="header-locale">
       <a-dropdown>
         <a class="ant-dropdown-link" @click="e => e.preventDefault()">
           <a-icon type="global" />
@@ -27,7 +41,7 @@
           </a-menu-item>
         </a-menu>
       </a-dropdown>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -46,13 +60,19 @@ export default {
     };
   },
   methods: {
+    // 切换菜单收缩
     changeCollapsed() {
       this.collapsed = !this.collapsed;
       this.$store.commit("system/changeCollapsed", this.collapsed);
     },
+    // 切换语言
     changeLocale({ key }) {
       this.$router.push({ query: { ...this.$route.query, locale: key } });
       this.$i18n.locale = key;
+    },
+    // 切换主题
+    changeTheme(theme) {
+      this.$router.push({ query: { ...this.$route.query, navTheme: theme } });
     }
   }
 };
@@ -90,11 +110,24 @@ export default {
   font-size: 20px;
 }
 
+.header-theme {
+  float: right;
+  width: 64px;
+  height: 64px;
+  line-height: 64px;
+  font-size: 20px;
+}
+
 .header-locale {
   float: right;
   width: 64px;
   height: 64px;
   line-height: 64px;
   font-size: 20px;
+}
+
+.icon {
+  color: #1da57a;
+  vertical-align: -0.25em;
 }
 </style>
