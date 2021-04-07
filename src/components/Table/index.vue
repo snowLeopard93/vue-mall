@@ -7,15 +7,15 @@
       :scroll="{ x: 1000, y: 490 }"
       :customRow="handleClickRow"
     >
-      <a
-        v-for="slotItem in columnSlots"
+      <template
+        v-for="(slotItem, slotItemIndex) in columnSlots"
         :slot="slotItem.slotName"
-        :key="slotItem.slotName"
         slot-scope="text, record"
-        @click="handleCellClick(record)"
       >
-        {{ text }}
-      </a>
+        <a :key="slotItemIndex" @click="handleCellClick(record)">
+          {{ text }}
+        </a>
+      </template>
     </a-table>
   </div>
 </template>
