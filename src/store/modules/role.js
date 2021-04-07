@@ -1,5 +1,6 @@
 // import axios from "axios";
 import { add, read } from "../../utils/indexedDB";
+import { filterData } from "../../utils/util";
 
 export default {
   namespaced: true,
@@ -26,8 +27,10 @@ export default {
       let request = read("role");
       request.onsuccess = event => {
         console.log(request.result);
+        let roleList = request.result;
+        let filterRoleList = filterData(roleList, params);
         console.log("读取成功！", event);
-        commit("getRoleList", request.result);
+        commit("getRoleList", filterRoleList);
       };
       // axios({
       //   url: "api/system/role",
