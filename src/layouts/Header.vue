@@ -72,7 +72,7 @@ export default {
     },
     // 切换主题
     changeTheme(theme) {
-      this.$router.push({ query: { ...this.$route.query, navTheme: theme } });
+      this.$store.commit("system/changeTheme", theme);
     }
   }
 };

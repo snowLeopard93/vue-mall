@@ -1,8 +1,15 @@
+let theme = localStorage.getItem("vue-mall-theme");
+if (!theme) {
+  localStorage.setItem("vue-mall-theme", "light");
+}
+
 export default {
   namespaced: true,
   state: {
     // 侧边菜单是否展开
     collapsed: false,
+    // 主题
+    theme: localStorage.getItem("vue-mall-theme"),
     // 当前菜单
     currentMenu: [],
     // “查看详情”抽屉是否打开
@@ -13,6 +20,10 @@ export default {
   mutations: {
     changeCollapsed(state, collapsed) {
       state.collapsed = collapsed;
+    },
+    changeTheme(state, theme) {
+      state.theme = theme;
+      localStorage.setItem("vue-mall-theme", theme);
     },
     chaneCurrentMenu(state, menu) {
       menu = menu.filter(item => {
@@ -30,6 +41,9 @@ export default {
   getters: {
     collapsed: state => {
       return state.collapsed;
+    },
+    theme: state => {
+      return state.theme;
     },
     currentMenu: state => {
       return state.currentMenu;

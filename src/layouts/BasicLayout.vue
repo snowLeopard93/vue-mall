@@ -1,14 +1,14 @@
 <template>
-  <div :class="[`nav-theme-${navTheme}`]">
+  <div :class="[`nav-theme-${theme}`]">
     <a-layout id="components-layout-demo-fixed">
       <a-layout-header
         :style="{ position: 'fixed', zIndex: 1, width: '100%', padding: 0 }"
       >
-        <Header :header-theme="navTheme" />
+        <Header :header-theme="theme" />
       </a-layout-header>
       <a-layout :style="{ padding: 0, marginTop: '64px' }">
         <a-layout-sider
-          :theme="navTheme"
+          :theme="theme"
           :trigger="null"
           v-model="collapsed"
           collapsible
@@ -20,7 +20,7 @@
             left: 0
           }"
         >
-          <SiderMenu :menu-theme="navTheme" :collapsed="collapsed" />
+          <SiderMenu :menu-theme="theme" :collapsed="collapsed" />
         </a-layout-sider>
         <a-layout
           class="basicLayout-content"
@@ -46,16 +46,14 @@ import Footer from "./Footer";
 import SiderMenu from "./SiderMenu";
 import MyBreadcrumb from "../components/Breadcrumb";
 
+import { mapState } from "vuex";
+
 export default {
   name: "BasicLayout",
-  computed: {
-    collapsed() {
-      return this.$store.state.system.collapsed;
-    },
-    navTheme() {
-      return this.$route.query.navTheme || "dark";
-    }
-  },
+  computed: mapState({
+    collapsed: state => state.system.collapsed,
+    theme: state => state.system.theme
+  }),
   components: {
     Header,
     Footer,
