@@ -26,6 +26,15 @@ export default {
   "app.system.role.roleNamePlaceholder": "Please enter roleName",
   "app.system.role.roleDescPlaceholder": "Please enter roleDesc",
   "app.system.role.statuscPlaceholder": "Please choose status",
+  /* 公告管理 */
+  "app.system.notice.titleLabel": "title",
+  "app.system.notice.statusLabel": "status",
+  "app.system.notice.contentLabel": "content",
+  "app.system.notice.cTimeLabel": "cTime",
+  "app.system.notice.mTimeLabel": "mTime",
+  "app.system.notice.titlePlaceholder": "Please enter title",
+  "app.system.notice.statusPlaceholder": "Please choose status",
+  "app.system.notice.contentPlaceholder": "Please enter content",
 
   "app.dashboard.analysis.timeLabel": "Time"
 };

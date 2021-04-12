@@ -26,6 +26,15 @@ export default {
   "app.system.role.roleNamePlaceholder": "请输入角色名",
   "app.system.role.roleDescPlaceholder": "请输入角色描述",
   "app.system.role.statuscPlaceholder": "请选择状态",
+  /* 公告管理 */
+  "app.system.notice.titleLabel": "标题",
+  "app.system.notice.statusLabel": "状态",
+  "app.system.notice.contentLabel": "内容",
+  "app.system.notice.cTimeLabel": "创建时间",
+  "app.system.notice.mTimeLabel": "修改时间",
+  "app.system.notice.titlePlaceholder": "请输入标题",
+  "app.system.notice.statusPlaceholder": "请选择状态",
+  "app.system.notice.contentPlaceholder": "请输入内容",
 
   "app.dashboard.analysis.timeLabel": "时间"
 };
