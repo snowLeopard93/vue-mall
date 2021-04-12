@@ -2,8 +2,11 @@
   <div>
     <MyToolBar>
       <template v-slot:leftToolBar>
-        <a-button type="primary" @click="getNoticeData">
+        <a-button type="primary" class="button-left" @click="getNoticeData">
           <IconFont type="icon-refresh" style="font-size: 14px;" />
+        </a-button>
+        <a-button type="primary" @click="addNotice">
+          <IconFont type="icon-add" style="font-size: 14px;" />
         </a-button>
       </template>
       <template v-slot:rightToolBar>
@@ -31,17 +34,20 @@
       @dbClickRow="dbClickRow"
     />
     <NoticeDetail />
+    <NoticeModify />
   </div>
 </template>
 
 <script>
 import NoticeDetail from "./detail";
+import NoticeModify from "./modify";
 import { mapState } from "vuex";
 
 export default {
   name: "Notice",
   components: {
-    NoticeDetail
+    NoticeDetail,
+    NoticeModify
   },
   mounted() {
     this.getNoticeData();
@@ -131,9 +137,11 @@ export default {
       this.$store.dispatch("notice/getNoticeList", params);
     },
     dbClickRow(data) {
-      console.log("bbb");
       this.$store.commit("notice/getCurrentSelectNotice", data);
       this.$store.commit("system/changeDetailDrawerVisible", true);
+    },
+    addNotice() {
+      this.$store.commit("system/changeModifyDrawerVisible", true);
     }
   }
 };
