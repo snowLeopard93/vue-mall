@@ -17,8 +17,12 @@ export function initDB() {
     let roleStore = db.createObjectStore("role", {
       keyPath: "key"
     });
+    let noticeStore = db.createObjectStore("notice", {
+      keyPath: "key"
+    });
     console.log(userStore);
     console.log(roleStore);
+    console.log(noticeStore);
   };
 }
 
