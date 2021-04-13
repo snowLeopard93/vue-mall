@@ -42,3 +42,11 @@ export function read(table) {
   let request = objectStore.getAll();
   return request;
 }
+
+/* 读取某一条数据 */
+export function readOne(table, key) {
+  let transaction = db.transaction([table]);
+  let objectStore = transaction.objectStore(table);
+  let request = objectStore.get(key);
+  return request;
+}
