@@ -22,7 +22,8 @@ import {
   Alert,
   Row,
   Col,
-  FormModel
+  FormModel,
+  Modal
 } from "ant-design-vue";
 import VueI18n from "vue-i18n";
 import Auth from "./directives/auth";
@@ -36,6 +37,7 @@ import MySelect from "./components/Select";
 import MyToolBar from "./layouts/ToolBar";
 import MyDetailDrawer from "./components/DetailDrawer";
 import MyModifyDrawer from "./components/Drawer/ModifyDrawer";
+import MyDialog from "./components/Dialog";
 
 Vue.config.productionTip = false;
 
@@ -59,6 +61,7 @@ Vue.use(Alert);
 Vue.use(Row);
 Vue.use(Col);
 Vue.use(FormModel);
+Vue.use(Modal);
 
 Vue.use(VueI18n);
 Vue.use(Auth);
@@ -79,6 +82,7 @@ Vue.component("MySelect", MySelect);
 Vue.component("MyToolBar", MyToolBar);
 Vue.component("MyDetailDrawer", MyDetailDrawer);
 Vue.component("MyModifyDrawer", MyModifyDrawer);
+Vue.component("MyDialog", MyDialog);
 
 const i18n = new VueI18n({
   locale: queryString.parse(location.search).locale || "zhCN",
