@@ -35,19 +35,23 @@
     />
     <NoticeDetail />
     <NoticeModify />
+    <NoticePreview />
   </div>
 </template>
 
 <script>
 import NoticeDetail from "./detail";
 import NoticeModify from "./modify";
+import NoticePreview from "./preview";
+
 import { mapState } from "vuex";
 
 export default {
   name: "Notice",
   components: {
     NoticeDetail,
-    NoticeModify
+    NoticeModify,
+    NoticePreview
   },
   mounted() {
     this.getNoticeData();
@@ -138,7 +142,7 @@ export default {
     },
     dbClickRow(data) {
       this.$store.commit("notice/getCurrentSelectNotice", data);
-      this.$store.commit("system/changeDetailDrawerVisible", true);
+      this.$store.commit("system/changeDialogVisible", true);
     },
     addNotice() {
       this.$store.commit("system/changeModifyDrawerVisible", true);
