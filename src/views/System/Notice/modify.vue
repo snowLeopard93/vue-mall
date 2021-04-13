@@ -54,8 +54,6 @@ import { mapState } from "vuex";
 import E from "wangeditor";
 import { validateTextMaxLen } from "../../../utils/validate";
 
-// let wangeditor;
-
 export default {
   name: "NoticeModify",
   data() {
@@ -112,8 +110,10 @@ export default {
   },
   // 销毁编辑器
   beforeDestroy() {
-    this.wangeditor.destroy();
-    this.wangeditor = null;
+    if (this.wangeditor) {
+      this.wangeditor.destroy();
+      this.wangeditor = null;
+    }
   },
   methods: {
     changeStatus(data) {
