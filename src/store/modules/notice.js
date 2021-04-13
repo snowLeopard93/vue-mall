@@ -1,6 +1,6 @@
 // import axios from "axios";
 
-import { add, read } from "../../utils/indexedDB";
+import { add, read, readOne } from "../../utils/indexedDB";
 import { filterData } from "../../utils/util";
 
 export default {
@@ -34,9 +34,9 @@ export default {
     }
   },
   getters: {
-    getCurrentSelectNotice: state => {
-      return state.currentSelectNotice;
-    }
+    // getCurrentSelectNotice: state => {
+    //   return state.currentSelectNotice;
+    // }
   },
   actions: {
     getNoticeList({ commit }, params) {
@@ -48,22 +48,25 @@ export default {
       //   commit("getNoticeList", response.data);
       // });
       let request = read("notice");
-      request.onsuccess = event => {
-        console.log(request.result);
+      request.onsuccess = () => {
         let noticeList = request.result;
         let filterNoticeList = filterData(noticeList, params);
-        console.log("读取成功！", event);
         commit("getNoticeList", filterNoticeList);
+      };
+    },
+    getNotice({ commit }, data) {
+      let key = data.key;
+      let request = readOne("notice", key);
+      request.onsuccess = () => {
+        let noticeList = request.result;
+        commit("getCurrentSelectNotice", noticeList);
       };
     },
     addNotice({ commit }, params) {
       let request = add("notice", params);
-      request.onsuccess = event => {
-        console.log("写入成功！", event);
+      request.onsuccess = () => {
         let readRequest = read("notice");
-        readRequest.onsuccess = event => {
-          console.log(readRequest.result);
-          console.log("读取成功！", event);
+        readRequest.onsuccess = () => {
           commit("getNoticeList", readRequest.result);
         };
       };

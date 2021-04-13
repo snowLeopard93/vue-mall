@@ -76,11 +76,6 @@ export default {
         }
       },
       {
-        title: "内容",
-        dataIndex: "content",
-        key: "content"
-      },
-      {
         title: "创建时间",
         dataIndex: "ctime",
         key: "ctime"
@@ -141,7 +136,7 @@ export default {
       this.$store.dispatch("notice/getNoticeList", params);
     },
     dbClickRow(data) {
-      this.$store.commit("notice/getCurrentSelectNotice", data);
+      this.$store.dispatch("notice/getNotice", data);
       this.$store.commit("system/changeDialogVisible", true);
     },
     addNotice() {
