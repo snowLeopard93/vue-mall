@@ -15,7 +15,9 @@ export default {
     // “查看详情”抽屉是否打开
     detailDrawerVisible: false,
     // “新增、修改”抽屉是否打开
-    modifyDrawerVisible: false
+    modifyDrawerVisible: false,
+    // “详情”对话框是否打开
+    dialogVisible: false
   },
   mutations: {
     changeCollapsed(state, collapsed) {
@@ -36,6 +38,9 @@ export default {
     },
     changeModifyDrawerVisible(state, visible) {
       state.modifyDrawerVisible = visible;
+    },
+    changeDialogVisible(state, visible) {
+      state.dialogVisible = visible;
     }
   },
   getters: {
@@ -53,6 +58,9 @@ export default {
     },
     modifyDrawerVisible: state => {
       return state.modifyDrawerVisible;
+    },
+    dialogVisible: state => {
+      return state.dialogVisible;
     }
   },
   actions: {},
