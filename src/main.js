@@ -35,7 +35,7 @@ import queryString from "query-string";
 import MyTable from "./components/Table";
 import MySelect from "./components/Select";
 import MyToolBar from "./layouts/ToolBar";
-import MyDetailDrawer from "./components/DetailDrawer";
+import MyDetailDrawer from "./components/Drawer/DetailDrawer";
 import MyModifyDrawer from "./components/Drawer/ModifyDrawer";
 import MyDialog from "./components/Dialog";
 import MyConfirmDialog from "./components/Dialog/ConfirmDialog";
