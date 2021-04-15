@@ -38,6 +38,7 @@ import MyToolBar from "./layouts/ToolBar";
 import MyDetailDrawer from "./components/DetailDrawer";
 import MyModifyDrawer from "./components/Drawer/ModifyDrawer";
 import MyDialog from "./components/Dialog";
+import MyConfirmDialog from "./components/Dialog/ConfirmDialog";
 
 Vue.config.productionTip = false;
 
@@ -83,6 +84,7 @@ Vue.component("MyToolBar", MyToolBar);
 Vue.component("MyDetailDrawer", MyDetailDrawer);
 Vue.component("MyModifyDrawer", MyModifyDrawer);
 Vue.component("MyDialog", MyDialog);
+Vue.component("MyConfirmDialog", MyConfirmDialog);
 
 const i18n = new VueI18n({
   locale: queryString.parse(location.search).locale || "zhCN",
