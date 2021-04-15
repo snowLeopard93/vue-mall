@@ -32,10 +32,12 @@
       :columns="columns"
       :data-source="noticeList"
       @dbClickRow="dbClickRow"
+      @handleActionClick="actionClick"
     />
     <NoticeDetail />
     <NoticeModify />
     <NoticePreview />
+    <MyConfirmDialog :content="content" @handleConfirmClick="deleteNotice" />
   </div>
 </template>
 
@@ -57,7 +59,8 @@ export default {
     this.getNoticeData();
   },
   computed: mapState({
-    noticeList: state => state.notice.noticeList
+    noticeList: state => state.notice.noticeList,
+    currentSelectNotice: state => state.notice.currentSelectNotice
   }),
   data() {
     const columns = [
@@ -87,7 +90,20 @@ export default {
       },
       {
         title: "操作",
-        key: "action"
+        key: "action",
+        scopedSlots: {
+          customRender: "action",
+          children: [
+            {
+              slotName: "edit",
+              actionName: "编辑"
+            },
+            {
+              slotName: "delete",
+              actionName: "删除"
+            }
+          ]
+        }
       }
     ];
     return {
@@ -115,7 +131,8 @@ export default {
         }
       ],
       searchParams: {},
-      searchTitle: ""
+      searchTitle: "",
+      content: "确认删除吗？"
     };
   },
   methods: {
@@ -141,6 +158,18 @@ export default {
     },
     addNotice() {
       this.$store.commit("system/changeModifyDrawerVisible", true);
+    },
+    deleteNotice() {
+      const deleteItem = this.currentSelectNotice;
+      this.$store.dispatch("notice/deleteNotice", deleteItem);
+    },
+    actionClick(data, actionType) {
+      if (actionType === "edit") {
+        this.$store.commit("system/changeModifyDrawerVisible", true);
+      } else if (actionType === "delete") {
+        this.$store.dispatch("notice/getNotice", data);
+        this.$store.commit("system/changeConfirmDialogVisible", true);
+      }
     }
   }
 };
