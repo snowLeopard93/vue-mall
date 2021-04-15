@@ -12,9 +12,22 @@
         :slot="slotItem.slotName"
         slot-scope="text, record"
       >
-        <a :key="slotItemIndex" @click="handleCellClick(record)">
-          {{ text }}
-        </a>
+        <div :key="slotItemIndex" v-if="slotItem.slotName === 'action'">
+          <template v-for="(actionItem, actionItemIndex) in slotItem.children">
+            <a
+              :slot="actionItem.slotName"
+              :key="actionItemIndex"
+              @click="handleActionClick(record, actionItem.slotName)"
+            >
+              {{ actionItem.actionName }}
+            </a>
+          </template>
+        </div>
+        <div :key="slotItemIndex" v-else>
+          <a @click="handleCellClick(record)">
+            {{ text }}
+          </a>
+        </div>
       </template>
     </a-table>
   </div>
@@ -69,7 +82,10 @@ export default {
         });
 
         if (item.scopedSlots) {
-          columnSlots.push({ slotName: item.scopedSlots.customRender });
+          columnSlots.push({
+            slotName: item.scopedSlots.customRender,
+            children: item.scopedSlots.children
+          });
         }
       });
       this.tableColumns = tableColumns;
@@ -79,7 +95,7 @@ export default {
       return {
         on: {
           click: () => {
-            console.log("行单击事件", record, index);
+            // console.log("行单击事件", record, index);
           },
           dblclick: () => {
             console.log("行双击事件", record, index);
@@ -89,6 +105,9 @@ export default {
     },
     handleCellClick(record) {
       this.$emit("dbClickRow", record);
+    },
+    handleActionClick(record, slotName) {
+      this.$emit("handleActionClick", record, slotName);
     }
   }
 };
