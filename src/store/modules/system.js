@@ -17,7 +17,9 @@ export default {
     // “新增、修改”抽屉是否打开
     modifyDrawerVisible: false,
     // “详情”对话框是否打开
-    dialogVisible: false
+    dialogVisible: false,
+    // “确认框”是否打开
+    confirmDialogVisible: false
   },
   mutations: {
     changeCollapsed(state, collapsed) {
@@ -41,6 +43,9 @@ export default {
     },
     changeDialogVisible(state, visible) {
       state.dialogVisible = visible;
+    },
+    changeConfirmDialogVisible(state, visible) {
+      state.confirmDialogVisible = visible;
     }
   },
   getters: {
@@ -61,6 +66,9 @@ export default {
     },
     dialogVisible: state => {
       return state.dialogVisible;
+    },
+    confirmDialogVisible: state => {
+      return state.confirmDialogVisible;
     }
   },
   actions: {},
