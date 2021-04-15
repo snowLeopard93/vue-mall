@@ -1,6 +1,6 @@
 // import axios from "axios";
 
-import { add, read, readOne } from "../../utils/indexedDB";
+import { add, read, readOne, deleteOne } from "../../utils/indexedDB";
 import { filterData } from "../../utils/util";
 
 export default {
@@ -72,6 +72,16 @@ export default {
       };
       request.onerror = event => {
         console.log("写入失败", event);
+      };
+    },
+    deleteNotice({ commit }, data) {
+      let key = data.key;
+      let request = deleteOne("notice", key);
+      request.onsuccess = () => {
+        let readRequest = read("notice");
+        readRequest.onsuccess = () => {
+          commit("getNoticeList", readRequest.result);
+        };
       };
     }
   },
