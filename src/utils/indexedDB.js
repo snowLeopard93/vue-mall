@@ -50,3 +50,11 @@ export function readOne(table, key) {
   let request = objectStore.get(key);
   return request;
 }
+
+/* 删除一条数据 */
+export function deleteOne(table, key) {
+  let transaction = db.transaction([table], "readwrite");
+  let objectStore = transaction.objectStore(table);
+  let request = objectStore.delete(key);
+  return request;
+}
