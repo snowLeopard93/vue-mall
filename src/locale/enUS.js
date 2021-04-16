@@ -35,6 +35,8 @@ export default {
   "app.system.notice.titlePlaceholder": "Please enter title",
   "app.system.notice.statusPlaceholder": "Please choose status",
   "app.system.notice.contentPlaceholder": "Please enter content",
+  "app.system.notice.createNotice": "createNotice",
+  "app.system.notice.modifyNotice": "modifyNotice",
 
   "app.dashboard.analysis.timeLabel": "Time"
 };

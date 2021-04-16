@@ -35,6 +35,8 @@ export default {
   "app.system.notice.titlePlaceholder": "请输入标题",
   "app.system.notice.statusPlaceholder": "请选择状态",
   "app.system.notice.contentPlaceholder": "请输入内容",
+  "app.system.notice.createNotice": "新增公告",
+  "app.system.notice.modifyNotice": "修改公告",
 
   "app.dashboard.analysis.timeLabel": "时间"
 };
