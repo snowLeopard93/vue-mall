@@ -35,6 +35,14 @@ export function add(table, data) {
   return request;
 }
 
+/* 修改数据 */
+export function modify(table, data) {
+  let transaction = db.transaction([table], "readwrite");
+  let objectStore = transaction.objectStore(table);
+  let request = objectStore.put(data);
+  return request;
+}
+
 /* 读取数据 */
 export function read(table) {
   let transaction = db.transaction([table]);
