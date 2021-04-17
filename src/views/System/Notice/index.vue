@@ -35,7 +35,7 @@
       @handleActionClick="actionClick"
     />
     <NoticeDetail />
-    <NoticeModify />
+    <NoticeModify :title="modifyTitle" />
     <NoticePreview />
     <MyConfirmDialog :content="content" @handleConfirmClick="deleteNotice" />
   </div>
@@ -60,7 +60,7 @@ export default {
   },
   computed: mapState({
     noticeList: state => state.notice.noticeList,
-    currentSelectNotice: state => state.notice.currentSelectNotice
+    notice: state => state.notice.currentSelectNotice
   }),
   data() {
     const columns = [
@@ -132,7 +132,8 @@ export default {
       ],
       searchParams: {},
       searchTitle: "",
-      content: "确认删除吗？"
+      content: "确认删除吗？",
+      modifyTitle: ""
     };
   },
   methods: {
@@ -157,17 +158,19 @@ export default {
       this.$store.commit("system/changeDialogVisible", true);
     },
     addNotice() {
+      this.modifyTitle = this.$t("message")["app.system.notice.createNotice"];
       this.$store.commit("system/changeModifyDrawerVisible", true);
     },
     deleteNotice() {
-      const deleteItem = this.currentSelectNotice;
+      const deleteItem = this.notice;
       this.$store.dispatch("notice/deleteNotice", deleteItem);
     },
     actionClick(data, actionType) {
+      this.$store.dispatch("notice/getNotice", data);
       if (actionType === "edit") {
+        this.modifyTitle = this.$t("message")["app.system.notice.modifyNotice"];
         this.$store.commit("system/changeModifyDrawerVisible", true);
       } else if (actionType === "delete") {
-        this.$store.dispatch("notice/getNotice", data);
         this.$store.commit("system/changeConfirmDialogVisible", true);
       }
     }

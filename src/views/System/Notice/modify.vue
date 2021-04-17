@@ -25,6 +25,7 @@
               >
                 <MySelect
                   :data-source="statusList"
+                  :defaultValue="ruleForm.status"
                   @handleChange="changeStatus"
                 />
               </a-form-model-item>
@@ -56,14 +57,23 @@ import { validateTextMaxLen } from "../../../utils/validate";
 
 export default {
   name: "NoticeModify",
+  props: {
+    title: {
+      type: String,
+      required: true,
+      default: () => {}
+    }
+  },
   data() {
     return {
-      title: "新增公告",
       wangeditor: null,
       ruleForm: {
+        key: "",
         noticeTitle: "",
         status: "",
-        content: ""
+        content: "",
+        ctime: "",
+        mtime: ""
       },
       rules: {
         title: [
@@ -91,7 +101,8 @@ export default {
     };
   },
   computed: mapState({
-    visible: state => state.system.modifyDrawerVisible
+    visible: state => state.system.modifyDrawerVisible,
+    notice: state => state.notice.currentSelectNotice
   }),
   watch: {
     visible() {
@@ -106,6 +117,11 @@ export default {
           }
         });
       }
+    },
+    notice(val) {
+      if (val) {
+        this.setFormInfo(val);
+      }
     }
   },
   // 销毁编辑器
@@ -119,27 +135,61 @@ export default {
     changeStatus(data) {
       this.ruleForm.status = data;
     },
+    // 对表单进行赋值操作
+    setFormInfo(val) {
+      this.ruleForm.key = val.key;
+      this.ruleForm.noticeTitle = val.noticeTitle;
+      this.ruleForm.status = val.status;
+      this.ruleForm.content = val.content;
+      this.ruleForm.ctime = val.ctime;
+      this.ruleForm.mtime = val.mtime;
+      // 判断 wangEditor渲染成功之后再赋值
+      if (this.wangeditor) {
+        this.wangeditor.txt.html(val.content);
+      }
+    },
     submitForm() {
       this.$refs["ruleForm"].validate(valid => {
         if (valid) {
           let values = this.ruleForm;
-          let key = uuidv4();
-          let createTime = moment().format("YYYY-MM-DD HH:mm:ss");
-          values["key"] = key;
-          values["ctime"] = createTime;
-          values["content"] = this.wangeditor.txt.html();
-          this.$store.dispatch("notice/addNotice", values);
+          // 根据 key 是否有值 判断是新增还是修改
+          let time = moment().format("YYYY-MM-DD HH:mm:ss");
+
+          console.log("bbb", values);
+          if (!values.key) {
+            let key = uuidv4();
+            values["key"] = key;
+            values["ctime"] = time;
+            values["content"] = this.wangeditor.txt.html();
+            this.$store.dispatch("notice/addNotice", values);
+          } else {
+            values["mtime"] = time;
+            values["content"] = this.wangeditor.txt.html();
+            this.$store.dispatch("notice/modifyNotice", values);
+          }
+          this.clearForm();
           this.$store.commit("system/changeModifyDrawerVisible", false);
-          this.$refs["ruleForm"].resetFields();
         } else {
           console.log("error submit!!");
           return false;
         }
       });
     },
-    close() {
-      this.$store.commit("system/changeModifyDrawerVisible", false);
+    // 清空表单
+    clearForm() {
+      this.ruleForm = {
+        key: "",
+        noticeTitle: "",
+        status: "",
+        content: "",
+        ctime: "",
+        mtime: ""
+      };
       this.$refs["ruleForm"].resetFields();
+    },
+    close() {
+      this.clearForm();
+      this.$store.commit("system/changeModifyDrawerVisible", false);
     }
   }
 };
