@@ -5,6 +5,7 @@
     option-filter-prop="children"
     style="width: 100%"
     :filter-option="filterOption"
+    :value="defaultValue"
     @focus="handleFocus"
     @blur="handleBlur"
     @change="handleChange"
@@ -27,10 +28,16 @@ export default {
       type: Array,
       required: true,
       default: () => {}
+    },
+    defaultValue: {
+      type: String,
+      required: false,
+      default: () => {}
     }
   },
   methods: {
     handleChange(value) {
+      this.defaultValue = value;
       this.$emit("handleChange", value);
     },
     handleBlur() {},
