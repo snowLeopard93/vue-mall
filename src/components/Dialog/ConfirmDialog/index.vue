@@ -14,6 +14,11 @@ export default {
       default: () => {}
     }
   },
+  data() {
+    return {
+      confirmDialogModal: null
+    };
+  },
   computed: mapState({
     visible: state => state.system.confirmDialogVisible
   }),
@@ -23,14 +28,18 @@ export default {
         this.$nextTick(() => {
           this.showConfirm();
         });
+      } else {
+        // 当确认弹框隐藏时 判断 Modal对象是否存在，存在则销毁
+        if (this.confirmDialogModal) {
+          this.confirmDialogModal.destroyAll();
+        }
       }
     }
   },
   methods: {
     showConfirm() {
       let that = this;
-      console.log(Modal);
-      Modal.confirm({
+      this.confirmDialogModal = Modal.confirm({
         title: that.content,
         onOk() {
           that.$emit("handleConfirmClick");
