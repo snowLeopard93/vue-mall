@@ -35,6 +35,32 @@ let orderManageRoutes = [
               )
           }
         ]
+      },
+      {
+        path: "/orderManage/eventCalendar",
+        name: "eventCalendar",
+        meta: {
+          title: "活动日历"
+        },
+        hideChildrenInMenu: true,
+        component: () =>
+          import(
+            /* webpackChunkName: "orderManage" */ "../../views/OrderManage/EventCalendar/index"
+          ),
+        children: [
+          {
+            path: "/orderManage/eventCalendar",
+            redirect: "/orderManage/eventCalendar/index"
+          },
+          {
+            path: "/orderManage/eventCalendar/index",
+            name: "eventCalendar",
+            component: () =>
+              import(
+                /* webpackChunkName: "orderManage" */ "../../views/OrderManage/EventCalendar/index"
+              )
+          }
+        ]
       }
     ]
   }
