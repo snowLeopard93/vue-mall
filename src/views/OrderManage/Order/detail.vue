@@ -72,9 +72,52 @@ export default {
         });
 
         driving.search(startLngLat, endLngLat, function(status, result) {
-          // 未出错时，result即是对应的路线规划方案
-          console.log(status);
-          console.log(result);
+          // 成功获取路线之后 执行小车动画效果
+          if (status === "complete") {
+            let route = result.routes && result.routes[0];
+            let lineArr = [];
+
+            route.steps.forEach(stepItem => {
+              lineArr.push([
+                stepItem.start_location.lng,
+                stepItem.start_location.lat
+              ]);
+              lineArr.push([
+                stepItem.end_location.lng,
+                stepItem.end_location.lat
+              ]);
+            });
+
+            let marker = new AMap.Marker({
+              map: map,
+              position: [116.478935, 39.997761],
+              icon: "https://webapi.amap.com/images/car.png",
+              offset: new AMap.Pixel(-26, -13),
+              autoRotation: true,
+              angle: -90
+            });
+
+            // 绘制轨迹
+            new AMap.Polyline({
+              map: map,
+              path: lineArr,
+              showDir: true,
+              strokeColor: "#28F", //线颜色
+              strokeWeight: 6 //线宽
+            });
+
+            let passedPolyline = new AMap.Polyline({
+              map: map,
+              strokeColor: "#AF5", //线颜色
+              strokeWeight: 6 //线宽
+            });
+
+            marker.on("moving", function(e) {
+              passedPolyline.setPath(e.passedPath);
+            });
+
+            marker.moveAlong(lineArr, 1000);
+          }
         });
       });
     }
