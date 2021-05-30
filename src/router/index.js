@@ -153,8 +153,9 @@ let defaultRoutes = [
   }
 ];
 
+console.log(process, process.env.BASE_URL);
 const router = new VueRouter({
-  mode: "history",
+  // mode: "history",
   base: process.env.BASE_URL,
   routes: [
     ...workbenchRoutes,

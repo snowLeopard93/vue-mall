@@ -1,28 +1,29 @@
 const path = require("path");
 const webpack = require("webpack");
-const AntDesignThemePlugin = require("antd-theme-webpack-plugin");
+// const AntDesignThemePlugin = require("antd-theme-webpack-plugin");
 const SpeedMeasureWebpackPlugin = require("speed-measure-webpack-plugin");
 
-const options = {
-  antDir: path.join(__dirname, "./node_modules/ant-design-vue"),
-  stylesDir: path.join(__dirname, "./src"),
-  varFile: path.join(
-    __dirname,
-    "./node_modules/ant-design-vue/lib/style/themes/default.less"
-  ),
-  themeVariables: ["@primary-color"],
-  indexFileName: "index.html",
-  generateOnce: false,
-  lessUrl: "https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js",
-  publicPath: "",
-  customColorRegexArray: [] // An array of regex codes to match your custom color variable values so that code can identify that it's a valid color. Make sure your regex does not adds false positives.
-};
+// const options = {
+//   antDir: path.join(__dirname, "./node_modules/ant-design-vue"),
+//   stylesDir: path.join(__dirname, "./src"),
+//   varFile: path.join(
+//     __dirname,
+//     "./node_modules/ant-design-vue/lib/style/themes/default.less"
+//   ),
+//   themeVariables: ["@primary-color"],
+//   indexFileName: "index.html",
+//   generateOnce: false,
+//   lessUrl: "https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js",
+//   publicPath: "",
+//   customColorRegexArray: [] // An array of regex codes to match your custom color variable values so that code can identify that it's a valid color. Make sure your regex does not adds false positives.
+// };
 
-const themePlugin = new AntDesignThemePlugin(options);
+// const themePlugin = new AntDesignThemePlugin(options);
 
 const smp = new SpeedMeasureWebpackPlugin();
 
 module.exports = {
+  publicPath: "/vue-mall",
   css: {
     loaderOptions: {
       less: {
@@ -36,7 +37,7 @@ module.exports = {
     }
   },
   configureWebpack: smp.wrap({
-    plugins: [themePlugin, new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
+    plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
     resolve: {
       alias: {
         "@ant-design/icons/lib/dist$": path.resolve(__dirname, "./src/icons.js")
