@@ -23,7 +23,8 @@ import {
   Row,
   Col,
   FormModel,
-  Modal
+  Modal,
+  Carousel
 } from "ant-design-vue";
 import VueI18n from "vue-i18n";
 import Auth from "./directives/auth";
@@ -63,6 +64,7 @@ Vue.use(Row);
 Vue.use(Col);
 Vue.use(FormModel);
 Vue.use(Modal);
+Vue.use(Carousel);
 
 Vue.use(VueI18n);
 Vue.use(Auth);
